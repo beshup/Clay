@@ -15,6 +15,8 @@
 #include <atomic>
 #include <condition_variable>
 
+using namespace std;
+
 enum COLOUR
 {
 	FG_BLACK		= 0x0000,
@@ -63,21 +65,19 @@ enum PIXEL_TYPE
 class clayGameEngine{
     public: 
         clayGameEngine(){
-            // m_nScreenWidth = 80;
-            // m_nScreenHeight = 30;
+			m_nScreenWidth = 80;
+            m_nScreenHeight = 30;
 
-            // m_hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-            // m_hConsoleIn = GetStdHandle(STD_INPUT_HANDLE);
+            m_hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+            m_hConsoleIn = GetStdHandle(STD_INPUT_HANDLE);
 
-            // std::memset(m_keyNewState, 0, 256 * sizeof(short));
-            // std::memset(m_keyOldState, 0, 256 * sizeof(short));
-            // std::memset(m_keys, 0, 256 * sizeof(sKeyState));
-            // m_mousePosX = 0;
-            // m_mousePosY = 0;
+           // std::memset(m_keyNewState, 0, 256 * sizeof(short));
+           // std::memset(m_keyOldState, 0, 256 * sizeof(short));
+           // std::memset(m_keys, 0, 256 * sizeof(sKeyState));
+           // m_mousePosX = 0;
+           // m_mousePosY = 0;
 
-            // m_bEnableSound = false;
-
-            // m_sAppName = L"Default";
+            m_sAppName = L"Default";
         }
 
         int ConstructConsole(int width, int height, int fontw, int fonth)
@@ -95,6 +95,7 @@ class clayGameEngine{
 
             // Set the size of the screen buffer
             COORD coord = { (short)m_nScreenWidth, (short)m_nScreenHeight };
+			cout << coord.X << " " << coord.Y << endl;
             if (!SetConsoleScreenBufferSize(m_hConsole, coord))
                 Error(L"SetConsoleScreenBufferSize");
 
@@ -138,9 +139,10 @@ class clayGameEngine{
             m_bufScreen = new CHAR_INFO[m_nScreenWidth*m_nScreenHeight];
             memset(m_bufScreen, 0, sizeof(CHAR_INFO) * m_nScreenWidth * m_nScreenHeight);
 
-            SetConsoleCtrlHandler((PHANDLER_ROUTINE)CloseHandler, TRUE);
+            //SetConsoleCtrlHandler((PHANDLER_ROUTINE)CloseHandler, TRUE);
             return 1;
 	    }
+
 
 		protected:
 			int Error(const wchar_t *msg)
@@ -151,7 +153,7 @@ class clayGameEngine{
 				wprintf(L"ERROR: %s\n\t%s\n", msg, buf);
 				return 0;
 			}
-
+			/*
 			static BOOL CloseHandler(DWORD evt)
 			{
 				if (evt == CTRL_CLOSE_EVENT)
@@ -164,6 +166,7 @@ class clayGameEngine{
 				}
 				return true;
 			}
+			*/
 
 
 		protected:
@@ -183,9 +186,9 @@ class clayGameEngine{
 			bool m_bConsoleInFocus = true;
 			bool m_bEnableSound = false;
 
-			static std::atomic<bool> m_bAtomActive;
-			static std::condition_variable m_cvGameFinished;
-			static std::mutex m_muxGame;
+			std::atomic<bool> m_bAtomActive;
+			std::condition_variable m_cvGameFinished;
+			std::mutex m_muxGame;
 		
 };
 
