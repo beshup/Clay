@@ -12,7 +12,7 @@ class Clay3D : clayGameEngine {
 int main()
 {
 	clayGameEngine c;
-	c.ConstructConsole(160, 160, 8, 8);
+	c.ConstructConsole(170, 127, 6, 8);
 
 }
 
