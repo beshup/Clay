@@ -149,7 +149,7 @@ public:
   {
     // Start the thread
     m_bAtomActive = true;
-    thread t = thread(&clayConsoleGameEngine::GameThread, this);
+    thread t = thread(&clayGameEngine::GameThread, this);
 
     // Wait for thread to be exited
     t.join();
@@ -255,7 +255,6 @@ private:
 
         default:
           break;
-          // We don't care just at the moment
         }
       }
 
