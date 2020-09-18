@@ -59,6 +59,7 @@ enum PIXEL_TYPE
 	PIXEL_QUARTER = 0x2591,
 };
 
+
 class clayGameEngine{
     public: 
         clayGameEngine(){
@@ -141,140 +142,50 @@ class clayGameEngine{
             return 1;
 	    }
 
-        virtual void Draw(int x, int y, short c = 0x2588, short col = 0x000F)
-        {
-            if (x >= 0 && x < m_nScreenWidth && y >= 0 && y < m_nScreenHeight)
-            {
-                m_bufScreen[y * m_nScreenWidth + x].Char.UnicodeChar = c;
-                m_bufScreen[y * m_nScreenWidth + x].Attributes = col;
-            }
-        }
+		protected:
+			int Error(const wchar_t *msg)
+			{
+				wchar_t buf[256];
+				FormatMessage(FORMAT_MESSAGE_FROM_SYSTEM, NULL, GetLastError(), MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), buf, 256, NULL);
+				SetConsoleActiveScreenBuffer(m_hOriginalConsole);
+				wprintf(L"ERROR: %s\n\t%s\n", msg, buf);
+				return 0;
+			}
 
-        void DrawString(int x, int y, std::wstring c, short col = 0x000F)
-        {
-            for (size_t i = 0; i < c.size(); i++)
-            {
-                m_bufScreen[y * m_nScreenWidth + x + i].Char.UnicodeChar = c[i];
-                m_bufScreen[y * m_nScreenWidth + x + i].Attributes = col;
-            }
-        }
+			static BOOL CloseHandler(DWORD evt)
+			{
+				if (evt == CTRL_CLOSE_EVENT)
+				{
+					m_bAtomActive = false;
 
-        void Clip(int &x, int &y)
-        {
-            if (x < 0) x = 0;
-            if (x >= m_nScreenWidth) x = m_nScreenWidth;
-            if (y < 0) y = 0;
-            if (y >= m_nScreenHeight) y = m_nScreenHeight;
-        }
-
-        void DrawLine(int x1, int y1, int x2, int y2, short c = 0x2588, short col = 0x000F)
-	    {
-            if (x1 > x2 && y1 > y1){
-                int x1copy = x1;
-                x1 = x2;
-                x2 = x1copy;
-
-                int y1copy = y1;
-                y1 = y2;
-                y2 = y1copy;
-            }
-
-            int dx, dy;
-            float error, slope;
-            
-            dx = x2 - x1;
-            dy = y2 - y1;
-
-            error = -1.0f;
-            slope = Math.abs(dy/dx);
-
-            if (dx == 0){
-                for (int y = y1; y < y2; y++){
-                    Draw(x, y, c, col)
-                }
-            }
-
-            if (dy == 0){
-                for (int x = x1; x < x2; x++){
-                    Draw(x, y, c, col)
-                }
-            }
-
-            if (dx >= dy){
-                int y = y1;
-                int yDir = y2 > y1 ? 1 : -1;
-
-                for (int x = x1; x < x2 -1; x++){
-                    error += slope;
-
-                    if( error  >=0 ){
-                        y += yDir;
-                        error--;
-                    }
-
-                    Draw(x, y, c, col)
-                }
-            }else if (dy >= dx){
-                int x = x1;
-                int xDir = x2 > x1 ? 1 : -1;
-
-                for (int y = y1; y < y2 -1; y++){
-                    error += slope;
-
-                    if( error  >=0 ){
-                        x += xDir;
-                        error--;
-                    }
-
-                    Draw(x, y, c, col)
-                }
-            }
+					// Wait for thread to be exited
+					std::unique_lock<std::mutex> ul(m_muxGame);
+					m_cvGameFinished.wait(ul);
+				}
+				return true;
+			}
 
 
-        }
+		protected:
+			int m_nScreenWidth;
+			int m_nScreenHeight;
+			CHAR_INFO *m_bufScreen;
+			std::wstring m_sAppName;
+			HANDLE m_hOriginalConsole;
+			CONSOLE_SCREEN_BUFFER_INFO m_OriginalConsoleInfo;
+			HANDLE m_hConsole;
+			HANDLE m_hConsoleIn;
+			SMALL_RECT m_rectWindow;
+			short m_keyOldState[256] = { 0 };
+			short m_keyNewState[256] = { 0 };
+			bool m_mouseOldState[5] = { 0 };
+			bool m_mouseNewState[5] = { 0 };
+			bool m_bConsoleInFocus = true;
+			bool m_bEnableSound = false;
 
-        void DrawTriangle(int x1, int y1, int x2, int y2, int x3, int y3, short c = 0x2588, short col = 0x000F)
-        {
-            DrawLine(x1, y1, x2, y2, c, col);
-            DrawLine(x2, y2, x3, y3, c, col);
-            DrawLine(x3, y3, x1, y1, c, col);
-        }
-  
-}
-
-
-
-
-
-
-
-
-
-protected:
-	int m_nScreenWidth;
-	int m_nScreenHeight;
-	CHAR_INFO *m_bufScreen;
-	std::wstring m_sAppName;
-	HANDLE m_hOriginalConsole;
-	CONSOLE_SCREEN_BUFFER_INFO m_OriginalConsoleInfo;
-	HANDLE m_hConsole;
-	HANDLE m_hConsoleIn;
-	SMALL_RECT m_rectWindow;
-	short m_keyOldState[256] = { 0 };
-	short m_keyNewState[256] = { 0 };
-	bool m_mouseOldState[5] = { 0 };
-	bool m_mouseNewState[5] = { 0 };
-	bool m_bConsoleInFocus = true;	
-	bool m_bEnableSound = false;
-
-	// These need to be static because of the OnDestroy call the OS may make. The OS
-	// spawns a special thread just for that
-	static std::atomic<bool> m_bAtomActive;
-	static std::condition_variable m_cvGameFinished;
-	static std::mutex m_muxGame;
+			static std::atomic<bool> m_bAtomActive;
+			static std::condition_variable m_cvGameFinished;
+			static std::mutex m_muxGame;
+		
 };
 
-// Define our static variables
-std::atomic<bool> clayConsoleGameEngine::m_bAtomActive(false);
-std::condition_variable clayConsoleGameEngine::m_cvGameFinished;
-std::mutex clayConsoleGameEngine::m_muxGame;
