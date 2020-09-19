@@ -1,4 +1,5 @@
 ﻿  Clay.cpp
+<<<<<<< HEAD
 C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\clayGameEngine.h(598,25): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
 C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\clayGameEngine.h(599,25): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
 C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\clayGameEngine.h(602,29): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
@@ -11,3 +12,38 @@ C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\clayGameEngine.h(616,24): w
 C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\clayGameEngine.h(617,24): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
 C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\clayGameEngine.h(630,32): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
   Clay.vcxproj -> C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\x64\Debug\Clay.exe
+=======
+C:\Users\erfan\GameEngine\Clay\Clay\Constants.h(71,27): error C3646: 'GetColor': unknown override specifier
+C:\Users\erfan\GameEngine\Clay\Clay\Constants.h(71,27): error C2059: syntax error: '('
+C:\Users\erfan\GameEngine\Clay\Clay\Constants.h(72,9): error C2334: unexpected token(s) preceding '{'; skipping apparent function body
+C:\Users\erfan\GameEngine\Clay\Clay\Tri.h(3,35): error C2504: 'clayGameEngine': base class undefined
+C:\Users\erfan\GameEngine\Clay\Clay\Tri.h(45,36): error C2065: 'vCamera': undeclared identifier
+C:\Users\erfan\GameEngine\Clay\Clay\Tri.h(46,33): error C2065: 'vCamera': undeclared identifier
+C:\Users\erfan\GameEngine\Clay\Clay\Tri.h(47,33): error C2065: 'vCamera': undeclared identifier
+C:\Users\erfan\GameEngine\Clay\Clay\Tri.h(58,5): error C2065: 'CHAR_INFO': undeclared identifier
+C:\Users\erfan\GameEngine\Clay\Clay\Tri.h(58,15): error C2146: syntax error: missing ';' before identifier 'c'
+C:\Users\erfan\GameEngine\Clay\Clay\Tri.h(58,15): error C2065: 'c': undeclared identifier
+C:\Users\erfan\GameEngine\Clay\Clay\Tri.h(58,23): error C2039: 'GetColor': is not a member of 'Constants'
+C:\Users\erfan\GameEngine\Clay\Clay\Constants.h(3): message : see declaration of 'Constants'
+C:\Users\erfan\GameEngine\Clay\Clay\Tri.h(59,11): error C2065: 'c': undeclared identifier
+C:\Users\erfan\GameEngine\Clay\Clay\Tri.h(60,11): error C2065: 'c': undeclared identifier
+C:\Users\erfan\GameEngine\Clay\Clay\Tri.h(76,36): error C2065: 'c': undeclared identifier
+C:\Users\erfan\GameEngine\Clay\Clay\Tri.h(77,36): error C2065: 'c': undeclared identifier
+C:\Users\erfan\GameEngine\Clay\Clay\Object.h(7,38): error C2504: 'clayGameEngine': base class undefined
+C:\Users\erfan\GameEngine\Clay\Clay\Object.h(99,14): error C3668: 'object::OnUserCreate': method with override specifier 'override' did not override any base class methods
+C:\Users\erfan\GameEngine\Clay\Clay\Object.h(103,14): error C3668: 'object::OnUserUpdate': method with override specifier 'override' did not override any base class methods
+C:\Users\erfan\GameEngine\Clay\Clay\Object.h(93,21): error C2065: 'PIXEL_SOLID': undeclared identifier
+C:\Users\erfan\GameEngine\Clay\Clay\Object.h(94,21): error C2065: 'FG_DARK_RED': undeclared identifier
+C:\Users\erfan\GameEngine\Clay\Clay\Object.h(132,21): error C3861: 'Draw': identifier not found
+C:\Users\erfan\GameEngine\Clay\Clay\Object.h(138,21): error C3861: 'Draw': identifier not found
+C:\Users\erfan\GameEngine\Clay\Clay\Object.h(159,21): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\erfan\GameEngine\Clay\Clay\Object.h(160,21): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\erfan\GameEngine\Clay\Clay\Object.h(163,17): error C3861: 'Draw': identifier not found
+C:\Users\erfan\GameEngine\Clay\Clay\Object.h(173,20): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\erfan\GameEngine\Clay\Clay\Object.h(174,20): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\erfan\GameEngine\Clay\Clay\Object.h(175,20): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\erfan\GameEngine\Clay\Clay\Object.h(176,20): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\erfan\GameEngine\Clay\Clay\Object.h(177,20): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\erfan\GameEngine\Clay\Clay\Object.h(178,20): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\erfan\GameEngine\Clay\Clay\Object.h(191,28): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+>>>>>>> test

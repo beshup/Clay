@@ -64,10 +64,10 @@ class tri : public Constants {
 			}
 		}
 
-		void offset() {
+		void offset(float offset) {
 			for (int i = 0; i < 3; i++)
 			{
-				vertices[i].z = vertices[i].z + 3.0f;
+				vertices[i].z = vertices[i].z + offset;
 			}
 		}
 };

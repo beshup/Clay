@@ -49,6 +49,20 @@ private:
 
 		RotateZX(fTheta, objects[0]);
 
+/*
+    Transformation matRotZ;
+    Transformation matRotX;
+    Transformation transMat;
+
+    matTrans.MakeTranslation(0.0f, 0.0f, 5.0f);
+    matRotX.RotateX(fTheta);
+    matRotZ.RotateZ(fTheta * 0.5f);
+
+    Transformation matWorld;
+    matWorld.MakeIdentity();
+    matWorld = MultiplyMatrix(matRotZ, matRotX);
+    matWorld = MultiplyMatrix(matWorld, matTrans);
+*/
 		return true;
 	}
 };
@@ -62,4 +76,3 @@ int main()
 	}
 
 }
-
