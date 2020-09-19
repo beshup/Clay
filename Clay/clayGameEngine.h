@@ -397,7 +397,6 @@ private:
 
         default:
           break;
-          // We don't care just at the moment
         }
       }
 
