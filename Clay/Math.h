@@ -1,9 +1,5 @@
 #pragma once
 
-#include "Vertex.h"
-
-#include <cmath>
-
 class Math {
     public:
         Math() {

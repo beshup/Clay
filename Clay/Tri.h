@@ -12,6 +12,13 @@ class tri : public clayGameEngine {
 			vertices[1] = b;
 			vertices[2] = c;
 		}
+		
+		tri(const tri &t1) {
+			for (int i = 0; i < 3; i++) {
+				vertices[i] = t1.vertices[i];
+			}
+		}
+
 
 		void ThreeDtoTwoD() {
 			offset();

@@ -1,6 +1,4 @@
 #pragma once
-using namespace std;
-#include <string>
 
 class Transformation : public Constants {
 	public:

@@ -1,11 +1,11 @@
 #pragma once
-#include <vector>
-#include <fstream>
-#include <strstream>
-#include <algorithm>
 
 class object : public clayGameEngine {
 	public:
+        object() {}
+
+        object(const object& o) {}
+
         bool LoadFromObjectFile(string filename)
         {
             ifstream f(filename);
@@ -77,7 +77,7 @@ class object : public clayGameEngine {
                 return z1Midpoint > z2Midpoint;
                 });
 
-            for (auto &triProjected : toBeRasterized)
+            for (auto& triProjected : toBeRasterized)
             {
 
                 //just the 3 lines after one another
@@ -93,15 +93,6 @@ class object : public clayGameEngine {
                     PIXEL_SOLID,
                     FG_DARK_RED);
             }
-        }
-
-        // THIS SUCKS - CHANGE THIS PLZ
-        bool OnUserCreate() override {
-
-        }
-
-        bool OnUserUpdate(float fElapsedTime) override {
-
         }
 
 

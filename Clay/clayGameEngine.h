@@ -5,17 +5,6 @@
 #error Turn UNICODE on for this system
 #endif
 
-#include <windows.h>
-
-#include <iostream>
-#include <chrono>
-#include <list>
-#include <thread>
-#include <atomic>
-#include <condition_variable>
-
-using namespace std;
-
 enum COLOUR
 {
   FG_BLACK = 0x0000,
@@ -184,8 +173,12 @@ public:
     t.join();
   }
 
-  virtual bool OnUserCreate() = 0;
-  virtual bool OnUserUpdate(float fElapsedTime) = 0;
+  bool OnUserCreate() {
+      return false;
+  }
+  bool OnUserUpdate(float fElapsedTime) {
+      return false;
+  }
 
 private:
   void GameThread()
@@ -371,7 +364,6 @@ protected:
   bool m_bConsoleInFocus = true;
   bool m_bEnableSound = false;
   Vertex vCamera;
-  vector<object> objects;
 
   std::atomic<bool> m_bAtomActive;
   std::condition_variable m_cvGameFinished;
