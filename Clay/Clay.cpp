@@ -1,6 +1,14 @@
 #include "clayGameEngine.h"
+#include <cstdlib>
 #include <iostream>
 
+struct tri {
+	Vertex vertices[3];
+};
+
+struct mesh {
+	vector<tri> tris;
+};
 
 class Clay3D :public clayGameEngine {
 	public:
@@ -10,25 +18,28 @@ class Clay3D :public clayGameEngine {
 
 		bool OnUserCreate() override {
 
-			DrawLine(0, 0, 100, 120);
-			Vertices a = Vertices(10, 12);
-			Vertices b = Vertices(2, 6);
-			Vertices c = Vertices(1, 10);
-			fillBottomTriangle(a, b, c);
+			//meshCube.tris = {
+
+			//}
 			
 			return true;
 		}
 
 		bool OnUserUpdate(float fElapsedTime) override {
-			
+			Vertex a = Vertex(450, 400);
+			Vertex b = Vertex(200, 300);
+			Vertex c = Vertex(300, 300);
+			fillBottomTriangle(a, b, c);
 			return true;
 		}
+	private:
+		mesh meshCube;
 };
 
 int main()
 {
 	Clay3D clay;
-	if (clay.ConstructConsole(170, 127, 6, 8)) {
+	if (clay.ConstructConsole(500, 500, 1, 1)) {
 		clay.Start();
 	}
 

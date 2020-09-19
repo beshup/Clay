@@ -61,13 +61,13 @@ enum PIXEL_TYPE
   PIXEL_QUARTER = 0x2591,
 };
 
-class Vertices {
+class Vertex {
 public: 
-    Vertices() {
+    Vertex() {
         x = 0;
         y = 0;
     }
-    Vertices(int x1, int y1) {
+    Vertex(int x1, int y1) {
         x = x1;
         y = y1;
     }
@@ -187,9 +187,10 @@ public:
       if (y >= m_nScreenHeight)
           y = m_nScreenHeight;
   }
+
+  /*
   void DrawLine(int x1, int y1, int x2, int y2, short c = 0x2588, short col = 0x000F)
   {
-      cout << "here" << endl;
       if (x1 > x2 && y1 > y1)
       {
           int x1copy = x1;
@@ -206,14 +207,12 @@ public:
       dx = x2 - x1;
       dy = y2 - y1;
 
-      error = -1.0f;
-      slope = abs(dy / dx);
-
       if (dx == 0)
       {
           for (int y = y1; y < y2; y++)
           {
               Draw(x1, y, c, col);
+              return;
           }
       }
 
@@ -222,8 +221,12 @@ public:
           for (int x = x1; x < x2; x++)
           {
               Draw(x, y1, c, col);
+              return;
           }
       }
+
+      error = -1.0f;
+      slope = abs(dy / dx);
 
       if (dx >= dy)
       {
@@ -262,6 +265,74 @@ public:
           }
       }
   }
+
+  */
+
+
+
+    void DrawLine(int x0, int y0, int x1, int y1, short c = 0x2588, short col = 0x000F) {
+        if (y1 - y0 > 0 && y1- y0 < x1 - x0) {
+            Bresenham(x0, y0, x1, y1, c, col);
+        }
+        else {
+            DDA(x0, y0, x1, y1, c, col);
+        }
+    }
+
+    void Bresenham(int x0, int y0, int x1, int y1, short c = 0x2588, short col = 0x000F) {
+        int dx, dy, p, x, y;
+
+        dx = x1 - x0;
+        dy = y1 - y0;
+
+        x = x0;
+        y = y0;
+
+        p = 2 * dy - dx;
+
+        while (x < x1)
+        {
+            if (p >= 0)
+            {
+                Draw(x, y, c, col);
+                y = y + 1;
+                p = p + 2 * dy - 2 * dx;
+            }
+            else
+            {
+                Draw(x, y, c, col);
+                p = p + 2 * dy;
+            }
+            x = x + 1;
+        }
+    }
+
+    void DDA(int X0, int Y0, int X1, int Y1, short c = 0x2588, short col = 0x000F)
+    {
+        // calculate dx & dy 
+        int dx = X1 - X0;
+        int dy = Y1 - Y0;
+
+        // calculate steps required for generating pixels 
+        int steps = abs(dx) > abs(dy) ? abs(dx) : abs(dy);
+
+        // calculate increment in x & y for each steps 
+        float Xinc = dx / (float)steps;
+        float Yinc = dy / (float)steps;
+
+        // Put pixel for each step 
+        float X = X0;
+        float Y = Y0;
+        for (int i = 0; i <= steps; i++)
+        {
+            Draw(X, Y, c, col);  // put pixel at (X,Y) 
+            X += Xinc;           // increment in x at each step 
+            Y += Yinc;           // increment in y at each step 
+       // for visualization of line- 
+                                 // generation step by step 
+        }
+    }
+
   void DrawTriangle(int x1, int y1, int x2, int y2, int x3, int y3, short c = 0x2588, short col = 0x000F)
   {
       DrawLine(x1, y1, x2, y2, c, col);
@@ -269,16 +340,14 @@ public:
       DrawLine(x3, y3, x1, y1, c, col);
   }
 
-  void fillBottomTriangle(Vertices v1, Vertices v2, Vertices v3) { //start at top, go ccw
+  void fillBottomTriangle(Vertex v1, Vertex v2, Vertex v3) { //start at top, go ccw
     //Need inverse slope to determine the change in x for every step in y
-      cout << "here2.0 " << endl;
       float slopeL = (v1.x - v2.x) / (v1.y - v2.y);
       float slopeR = (v1.x - v3.x) / (v1.y - v3.y);
       float xCurL = v2.x;
       float xCurR = v3.x;
 
       for (int scanY = v2.y; scanY <= v1.y; scanY++) {
-          cout << "herejhkgggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg" << endl;
 
           DrawLine((int)xCurL, scanY, (int)xCurR, scanY);
           xCurL += slopeL;

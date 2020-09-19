@@ -1,11 +1,10 @@
-<<<<<<< HEAD
 ﻿  Clay.cpp
-C:\Users\erfan\GameEngine\Clay\Clay\clayGameEngine.h(210,18): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\erfan\GameEngine\Clay\Clay\clayGameEngine.h(275,20): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-C:\Users\erfan\GameEngine\Clay\Clay\clayGameEngine.h(276,20): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-C:\Users\erfan\GameEngine\Clay\Clay\clayGameEngine.h(277,19): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-C:\Users\erfan\GameEngine\Clay\Clay\clayGameEngine.h(278,19): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-  Clay.vcxproj -> C:\Users\erfan\GameEngine\Clay\x64\Debug\Clay.exe
-=======
-﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.Cpp.Platform.targets(67,5): error MSB8020: The build tools for v142 (Platform Toolset = 'v142') cannot be found. To build using the v142 build tools, please install v142 build tools.  Alternatively, you may upgrade to the current Visual Studio tools by selecting the Project menu or right-click the solution, and then selecting "Retarget solution".
->>>>>>> 796379fdcad03698993f0cf837ba50831ca0166e
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\clayGameEngine.h(324,17): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\clayGameEngine.h(325,17): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\clayGameEngine.h(328,21): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\clayGameEngine.h(328,18): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\clayGameEngine.h(345,20): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\clayGameEngine.h(346,20): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\clayGameEngine.h(347,19): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\clayGameEngine.h(348,19): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+  Clay.vcxproj -> C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\x64\Debug\Clay.exe
