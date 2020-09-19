@@ -1,48 +1,13 @@
 ﻿  Clay.cpp
-C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\Object.h(150,21): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\Object.h(151,21): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\Object.h(154,25): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\Object.h(154,22): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\Object.h(164,20): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\Object.h(165,20): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\Object.h(166,20): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\Object.h(167,20): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\Object.h(168,20): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\Object.h(169,20): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\Object.h(182,28): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.27.29110\include\algorithm(3988,25): error C2280: 'tri &tri::operator =(const tri &)': attempting to reference a deleted function
-C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\Tri.h(101): message : compiler has generated 'tri::operator =' here
-C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\Tri.h(101,1): message : 'tri &tri::operator =(const tri &)': function was implicitly deleted because a base class invokes a deleted or inaccessible function 'clayGameEngine &clayGameEngine::operator =(const clayGameEngine &)'
-C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\clayGameEngine.h(371,1): message : 'clayGameEngine &clayGameEngine::operator =(const clayGameEngine &)': function was implicitly deleted because a data member invokes a deleted or inaccessible function 'std::atomic<bool> &std::atomic<bool>::operator =(const std::atomic<bool> &)'
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.27.29110\include\atomic(1519,13): message : 'std::atomic<bool> &std::atomic<bool>::operator =(const std::atomic<bool> &)': function was explicitly deleted
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.27.29110\include\algorithm(4108): message : see reference to function template instantiation '_BidIt std::_Insertion_sort_unchecked<_RanIt,_Pr>(_BidIt,const _BidIt,_Pr)' being compiled
-          with
-          [
-              _BidIt=tri *,
-              _RanIt=tri *,
-              _Pr=object::Rasterize::<lambda_98e198c686217d1b78ad6a56fadced69>
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.27.29110\include\algorithm(4138): message : see reference to function template instantiation 'void std::_Sort_unchecked<tri*,_Fn>(_RanIt,_RanIt,__int64,_Pr)' being compiled
-          with
-          [
-              _Fn=object::Rasterize::<lambda_98e198c686217d1b78ad6a56fadced69>,
-              _RanIt=tri *,
-              _Pr=object::Rasterize::<lambda_98e198c686217d1b78ad6a56fadced69>
-          ]
-C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\Object.h(78): message : see reference to function template instantiation 'void std::sort<std::_Vector_iterator<std::_Vector_val<std::_Simple_types<_Ty>>>,object::Rasterize::<lambda_98e198c686217d1b78ad6a56fadced69>>(const _RanIt,const _RanIt,_Pr)' being compiled
-          with
-          [
-              _Ty=tri,
-              _RanIt=std::_Vector_iterator<std::_Vector_val<std::_Simple_types<tri>>>,
-              _Pr=object::Rasterize::<lambda_98e198c686217d1b78ad6a56fadced69>
-          ]
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.27.29110\include\algorithm(3991,29): error C2280: 'tri &tri::operator =(const tri &)': attempting to reference a deleted function
-C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\Tri.h(101): message : compiler has generated 'tri::operator =' here
-C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\Tri.h(101,1): message : 'tri &tri::operator =(const tri &)': function was implicitly deleted because a base class invokes a deleted or inaccessible function 'clayGameEngine &clayGameEngine::operator =(const clayGameEngine &)'
-C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\clayGameEngine.h(371,1): message : 'clayGameEngine &clayGameEngine::operator =(const clayGameEngine &)': function was implicitly deleted because a data member invokes a deleted or inaccessible function 'std::atomic<bool> &std::atomic<bool>::operator =(const std::atomic<bool> &)'
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.27.29110\include\atomic(1519,13): message : 'std::atomic<bool> &std::atomic<bool>::operator =(const std::atomic<bool> &)': function was explicitly deleted
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.27.29110\include\algorithm(3994,25): error C2280: 'tri &tri::operator =(const tri &)': attempting to reference a deleted function
-C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\Tri.h(101): message : compiler has generated 'tri::operator =' here
-C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\Tri.h(101,1): message : 'tri &tri::operator =(const tri &)': function was implicitly deleted because a base class invokes a deleted or inaccessible function 'clayGameEngine &clayGameEngine::operator =(const clayGameEngine &)'
-C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\clayGameEngine.h(371,1): message : 'clayGameEngine &clayGameEngine::operator =(const clayGameEngine &)': function was implicitly deleted because a data member invokes a deleted or inaccessible function 'std::atomic<bool> &std::atomic<bool>::operator =(const std::atomic<bool> &)'
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.27.29110\include\atomic(1519,13): message : 'std::atomic<bool> &std::atomic<bool>::operator =(const std::atomic<bool> &)': function was explicitly deleted
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\clayGameEngine.h(542,25): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\clayGameEngine.h(543,25): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\clayGameEngine.h(546,29): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\clayGameEngine.h(546,26): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\clayGameEngine.h(556,24): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\clayGameEngine.h(557,24): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\clayGameEngine.h(558,24): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\clayGameEngine.h(559,24): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\clayGameEngine.h(560,24): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\clayGameEngine.h(561,24): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\clayGameEngine.h(574,32): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+  Clay.vcxproj -> C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\x64\Debug\Clay.exe

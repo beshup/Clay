@@ -11,9 +11,9 @@ class Transformation : public Constants {
 			name = inputName;
 			// can't use switch here :( (directly at least)
 			if (inputName == "projected") {
-				float fNear = 0.3f;
-				float fFar = 2500.0f;
-				float fFov = 90.0f;
+				float fNear = 10.0f;
+				float fFar = 5000.0f;
+				float fFov = 150.0f;
 				float fAspectRatio = (float)ScreenHeight() / (float)ScreenWidth();
 				// degrees to rad
 				float fFovRad = 1.0f / tanf(fFov * 0.5f / 180.0f * 3.141519f);
@@ -27,6 +27,7 @@ class Transformation : public Constants {
 				name = "Projection";
 			}
 		}
+
 		void RotateX(float fTheta) {
 			matrix[0][0] = 1;
 			matrix[1][1] = cosf(fTheta * 0.5f);

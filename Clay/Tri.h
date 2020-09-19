@@ -1,16 +1,18 @@
 #pragma once
 
-class tri : public clayGameEngine {
+class tri : public Constants {
 
 	public:
 		Vertex vertices[3];
-		wchar_t sym; //symbol for shading
-		short col;   //color
-
-		tri(Vertex &a, Vertex &b, Vertex &c) {
+		wchar_t sym = PIXEL_SOLID; //symbol for shading
+		short col = FG_WHITE;   //color
+		
+		tri(Vertex a, Vertex b, Vertex c) {
 			vertices[0] = a;
 			vertices[1] = b;
 			vertices[2] = c;
+			sym = PIXEL_SOLID;
+			col = FG_WHITE;
 		}
 		
 		tri(const tri &t1) {
@@ -19,10 +21,9 @@ class tri : public clayGameEngine {
 			}
 		}
 
-
-		void ThreeDtoTwoD() {
+		void ThreeDtoTwoD(Vertex vCamera) {
 			offset();
-			illumination();
+			illumination(vCamera);
 			for (int i = 0; i < 3; i++) {
 				Transformation t1("projected");
 				vertices[i].MultiplyMatrixVector(t1);
@@ -32,7 +33,7 @@ class tri : public clayGameEngine {
 			unNormalization();
 		}
 
-		void illumination() {
+		void illumination(Vertex vCamera) {
 			Vertex normal, line, line1;
 
 			//calculate each line
@@ -80,8 +81,8 @@ class tri : public clayGameEngine {
 
 		void unNormalization() {
 			for (int i = 0; i < 3; i++) {
-				vertices[i].x *= 0.5f * (float)c.ScreenWidth();
-				vertices[i].y *= 0.5f * (float)c.ScreenHeight();
+				vertices[i].x *= 0.5f * (float)ScreenWidth();
+				vertices[i].y *= 0.5f * (float)ScreenHeight();
 			}
 		}
 

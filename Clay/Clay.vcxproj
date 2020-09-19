@@ -165,7 +165,6 @@
     <ClInclude Include="headers.h" />
     <ClInclude Include="Math.h" />
     <ClInclude Include="Transformation.h" />
-    <ClInclude Include="Object.h" />
     <ClInclude Include="Tri.h" />
     <ClInclude Include="Vertex.h" />
   </ItemGroup>
