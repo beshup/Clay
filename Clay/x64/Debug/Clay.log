@@ -1,2 +1,7 @@
 ﻿  Clay.cpp
+C:\Users\erfan\GameEngine\Clay\Clay\clayGameEngine.h(210,18): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\erfan\GameEngine\Clay\Clay\clayGameEngine.h(275,20): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\erfan\GameEngine\Clay\Clay\clayGameEngine.h(276,20): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\erfan\GameEngine\Clay\Clay\clayGameEngine.h(277,19): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\erfan\GameEngine\Clay\Clay\clayGameEngine.h(278,19): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
   Clay.vcxproj -> C:\Users\erfan\GameEngine\Clay\x64\Debug\Clay.exe

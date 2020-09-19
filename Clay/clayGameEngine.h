@@ -61,6 +61,20 @@ enum PIXEL_TYPE
   PIXEL_QUARTER = 0x2591,
 };
 
+class Vertices {
+public: 
+    Vertices() {
+        x = 0;
+        y = 0;
+    }
+    Vertices(int x1, int y1) {
+        x = x1;
+        y = y1;
+    }
+
+    int x, y = 0;
+};
+
 class clayGameEngine
 {
 public:
@@ -80,7 +94,7 @@ public:
 
     m_sAppName = L"Default";
   }
-
+  
   int ConstructConsole(int width, int height, int fontw, int fonth)
   {
     if (m_hConsole == INVALID_HANDLE_VALUE)
@@ -144,12 +158,139 @@ public:
     return 1;
   }
 
-public:
+  virtual void Draw(int x, int y, short c = 0x2588, short col = 0x000F)
+  {
+      if (x >= 0 && x < m_nScreenWidth && y >= 0 && y < m_nScreenHeight)
+      {
+          m_bufScreen[y * m_nScreenWidth + x].Char.UnicodeChar = c;
+          m_bufScreen[y * m_nScreenWidth + x].Attributes = col;
+      }
+  }
+
+  void DrawString(int x, int y, std::wstring c, short col = 0x000F)
+  {
+      for (size_t i = 0; i < c.size(); i++)
+      {
+          m_bufScreen[y * m_nScreenWidth + x + i].Char.UnicodeChar = c[i];
+          m_bufScreen[y * m_nScreenWidth + x + i].Attributes = col;
+      }
+  }
+
+  void Clip(int& x, int& y)
+  {
+      if (x < 0)
+          x = 0;
+      if (x >= m_nScreenWidth)
+          x = m_nScreenWidth;
+      if (y < 0)
+          y = 0;
+      if (y >= m_nScreenHeight)
+          y = m_nScreenHeight;
+  }
+  void DrawLine(int x1, int y1, int x2, int y2, short c = 0x2588, short col = 0x000F)
+  {
+      cout << "here" << endl;
+      if (x1 > x2 && y1 > y1)
+      {
+          int x1copy = x1;
+          x1 = x2;
+          x2 = x1copy;
+
+          int y1copy = y1;
+          y1 = y2;
+          y2 = y1copy;
+      }
+      int dx, dy;
+      float error, slope;
+
+      dx = x2 - x1;
+      dy = y2 - y1;
+
+      error = -1.0f;
+      slope = abs(dy / dx);
+
+      if (dx == 0)
+      {
+          for (int y = y1; y < y2; y++)
+          {
+              Draw(x1, y, c, col);
+          }
+      }
+
+      if (dy == 0)
+      {
+          for (int x = x1; x < x2; x++)
+          {
+              Draw(x, y1, c, col);
+          }
+      }
+
+      if (dx >= dy)
+      {
+          int y = y1;
+          int yDir = y2 > y1 ? 1 : -1;
+
+          for (int x = x1; x < x2 - 1; x++)
+          {
+              error += slope;
+
+              if (error >= 0)
+              {
+                  y += yDir;
+                  error--;
+              }
+
+              Draw(x, y, c, col);
+          }
+      }
+      else if (dy >= dx)
+      {
+          int x = x1;
+          int xDir = x2 > x1 ? 1 : -1;
+
+          for (int y = y1; y < y2 - 1; y++)
+          {
+              error += slope;
+
+              if (error >= 0)
+              {
+                  x += xDir;
+                  error--;
+              }
+
+              Draw(x, y, c, col);
+          }
+      }
+  }
+  void DrawTriangle(int x1, int y1, int x2, int y2, int x3, int y3, short c = 0x2588, short col = 0x000F)
+  {
+      DrawLine(x1, y1, x2, y2, c, col);
+      DrawLine(x2, y2, x3, y3, c, col);
+      DrawLine(x3, y3, x1, y1, c, col);
+  }
+
+  void fillBottomTriangle(Vertices v1, Vertices v2, Vertices v3) { //start at top, go ccw
+    //Need inverse slope to determine the change in x for every step in y
+      cout << "here2.0 " << endl;
+      float slopeL = (v1.x - v2.x) / (v1.y - v2.y);
+      float slopeR = (v1.x - v3.x) / (v1.y - v3.y);
+      float xCurL = v2.x;
+      float xCurR = v3.x;
+
+      for (int scanY = v2.y; scanY <= v1.y; scanY++) {
+          cout << "herejhkgggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg" << endl;
+
+          DrawLine((int)xCurL, scanY, (int)xCurR, scanY);
+          xCurL += slopeL;
+          xCurR += slopeR;
+      }
+  }
+
   void Start()
   {
     // Start the thread
     m_bAtomActive = true;
-    thread t = thread(&clayConsoleGameEngine::GameThread, this);
+    thread t = thread(&clayGameEngine::GameThread, this);
 
     // Wait for thread to be exited
     t.join();
@@ -171,8 +312,9 @@ public:
 private:
   void GameThread()
   {
-    if (!OnUserCreate())
-      m_bAtomActive = false;
+      if (!OnUserCreate()) {
+          m_bAtomActive = false;
+      }
 
     auto tp1 = chrono::system_clock::now();
     auto tp2 = chrono::system_clock::now();
@@ -287,7 +429,7 @@ private:
 
       // Update Title & Present Screen Buffer
       wchar_t s[256];
-      swprintf_s(s, 256, L"OneLoneCoder.com - Console Game Engine - %s - FPS: %3.2f", m_sAppName.c_str(), 1.0f / fElapsedTime);
+      swprintf_s(s, 256,  m_sAppName.c_str(), 1.0f / fElapsedTime);
       SetConsoleTitle(s);
       WriteConsoleOutput(m_hConsole, m_bufScreen, {(short)m_nScreenWidth, (short)m_nScreenHeight}, {0, 0}, &m_rectWindow);
     }
@@ -318,6 +460,7 @@ protected:
 			*/
 
 protected:
+  
   struct sKeyState
   {
     bool bPressed;
