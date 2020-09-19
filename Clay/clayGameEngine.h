@@ -9,7 +9,6 @@
 
 #include <iostream>
 #include <chrono>
-#include <vector>
 #include <list>
 #include <thread>
 #include <atomic>
@@ -61,33 +60,14 @@ enum PIXEL_TYPE
   PIXEL_QUARTER = 0x2591,
 };
 
-class Vertex {
-public: 
-    Vertex() {
-        x = 0;
-        y = 0;
-        z = 0;
-    }
-    Vertex(float x1, float y1) {
-        x = x1;
-        y = y1;
-    }
-    Vertex(float x1, float y1, float z1) {
-        x = x1;
-        y = y1;
-        z = z1;
-    }
 
-    float x, y, z = 0;
-};
 
 class clayGameEngine
 {
 public:
   clayGameEngine()
   {
-    m_nScreenWidth = 80;
-    m_nScreenHeight = 30;
+
 
     m_hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
     m_hConsoleIn = GetStdHandle(STD_INPUT_HANDLE);
@@ -106,8 +86,8 @@ public:
     if (m_hConsole == INVALID_HANDLE_VALUE)
       return Error(L"Bad Handle");
 
-    m_nScreenWidth = width;
-    m_nScreenHeight = height;
+    c.setScreenWidth(width);
+    c.setScreenHeight(height);
 
     // Change console visual size to a minimum so ScreenBuffer can shrink
     // below the actual visual size
@@ -115,7 +95,7 @@ public:
     SetConsoleWindowInfo(m_hConsole, TRUE, &m_rectWindow);
 
     // Set the size of the screen buffer
-    COORD coord = {(short)m_nScreenWidth, (short)m_nScreenHeight};
+    COORD coord = {(short)c.ScreenWidth(), (short)c.ScreenHeight()};
     if (!SetConsoleScreenBufferSize(m_hConsole, coord))
       Error(L"SetConsoleScreenBufferSize");
 
@@ -140,15 +120,15 @@ public:
     CONSOLE_SCREEN_BUFFER_INFO csbi;
     if (!GetConsoleScreenBufferInfo(m_hConsole, &csbi))
       return Error(L"GetConsoleScreenBufferInfo");
-    if (m_nScreenHeight > csbi.dwMaximumWindowSize.Y)
+    if (c.ScreenHeight() > csbi.dwMaximumWindowSize.Y)
     {
       return Error(L"Screen Height / Font Height Too Big");
     }
-    if (m_nScreenWidth > csbi.dwMaximumWindowSize.X)
+    if (c.ScreenWidth() > csbi.dwMaximumWindowSize.X)
       return Error(L"Screen Width / Font Width Too Big");
 
     // Set Physical Console Window Size
-    m_rectWindow = {0, 0, (short)m_nScreenWidth - 1, (short)m_nScreenHeight - 1};
+    m_rectWindow = {0, 0, (short)c.ScreenWidth() - 1, (short)c.ScreenHeight() - 1};
     if (!SetConsoleWindowInfo(m_hConsole, TRUE, &m_rectWindow))
       return Error(L"SetConsoleWindowInfo");
 
@@ -157,142 +137,41 @@ public:
       return Error(L"SetConsoleMode");
 
     // Allocate memory for screen buffer
-    m_bufScreen = new CHAR_INFO[m_nScreenWidth * m_nScreenHeight];
-    memset(m_bufScreen, 0, sizeof(CHAR_INFO) * m_nScreenWidth * m_nScreenHeight);
+    m_bufScreen = new CHAR_INFO[c.ScreenWidth() * c.ScreenHeight()];
+    memset(m_bufScreen, 0, sizeof(CHAR_INFO) * c.ScreenWidth() * c.ScreenHeight());
 
     //SetConsoleCtrlHandler((PHANDLER_ROUTINE)CloseHandler, TRUE);
     return 1;
   }
 
-  virtual void Draw(int x, int y, short c = 0x2588, short col = 0x000F)
+  void Draw(int x, int y, short ca = 0x2588, short col = 0x000F)
   {
-      if (x >= 0 && x < m_nScreenWidth && y >= 0 && y < m_nScreenHeight)
+      if (x >= 0 && x < c.ScreenWidth() && y >= 0 && y < c.ScreenHeight())
       {
-          m_bufScreen[y * m_nScreenWidth + x].Char.UnicodeChar = c;
-          m_bufScreen[y * m_nScreenWidth + x].Attributes = col;
+          m_bufScreen[y * c.ScreenWidth() + x].Char.UnicodeChar = ca;
+          m_bufScreen[y * c.ScreenWidth() + x].Attributes = col;
       }
   }
 
-  void DrawString(int x, int y, std::wstring c, short col = 0x000F)
+  void Fill(int x1, int y1, int x2, int y2, short c = 0x2588, short col = 0x000F)
   {
-      for (size_t i = 0; i < c.size(); i++)
-      {
-          m_bufScreen[y * m_nScreenWidth + x + i].Char.UnicodeChar = c[i];
-          m_bufScreen[y * m_nScreenWidth + x + i].Attributes = col;
-      }
+      Clip(x1, y1);
+      Clip(x2, y2);
+      for (int x = x1; x < x2; x++)
+          for (int y = y1; y < y2; y++)
+              Draw(x, y, c, col);
   }
 
   void Clip(int& x, int& y)
   {
       if (x < 0)
           x = 0;
-      if (x >= m_nScreenWidth)
-          x = m_nScreenWidth;
+      if (x >= c.ScreenWidth())
+          x = c.ScreenWidth();
       if (y < 0)
           y = 0;
-      if (y >= m_nScreenHeight)
-          y = m_nScreenHeight;
-  }
-
-
-    void DrawLine(int x0, int y0, int x1, int y1, short c = 0x2588, short col = 0x000F) {
-        if (y1 - y0 > 0 && y1- y0 < x1 - x0) {
-            Bresenham(x0, y0, x1, y1, c, col);
-        }
-        else {
-            DDA(x0, y0, x1, y1, c, col);
-        }
-    }
-
-    void Bresenham(int x0, int y0, int x1, int y1, short c = 0x2588, short col = 0x000F) {
-        int dx, dy, p, x, y;
-
-        dx = x1 - x0;
-        dy = y1 - y0;
-
-        x = x0;
-        y = y0;
-
-        p = 2 * dy - dx;
-
-        while (x < x1)
-        {
-            if (p >= 0)
-            {
-                Draw(x, y, c, col);
-                y = y + 1;
-                p = p + 2 * dy - 2 * dx;
-            }
-            else
-            {
-                Draw(x, y, c, col);
-                p = p + 2 * dy;
-            }
-            x = x + 1;
-        }
-    }
-
-    void DDA(int X0, int Y0, int X1, int Y1, short c = 0x2588, short col = 0x000F)
-    {
-        // calculate dx & dy 
-        int dx = X1 - X0;
-        int dy = Y1 - Y0;
-
-        // calculate steps required for generating pixels 
-        int steps = abs(dx) > abs(dy) ? abs(dx) : abs(dy);
-
-        // calculate increment in x & y for each steps 
-        float Xinc = dx / (float)steps;
-        float Yinc = dy / (float)steps;
-
-        // Put pixel for each step 
-        float X = X0;
-        float Y = Y0;
-        for (int i = 0; i <= steps; i++)
-        {
-            Draw(X, Y, c, col);  // put pixel at (X,Y) 
-            X += Xinc;           // increment in x at each step 
-            Y += Yinc;           // increment in y at each step 
-       // for visualization of line- 
-                                 // generation step by step 
-        }
-    }
-
-    void Fill(int x1, int y1, int x2, int y2, short c = 0x2588, short col = 0x000F)
-    {
-        Clip(x1, y1);
-        Clip(x2, y2);
-        for (int x = x1; x < x2; x++)
-            for (int y = y1; y < y2; y++)
-                Draw(x, y, c, col);
-    }
-
-  void DrawTriangle(Vertex v1, Vertex v2, Vertex v3, short c = 0x2588, short col = 0x000F)
-  {
-      int x1 = v1.x;
-      int y1 = v1.y;
-      int x2 = v2.x;
-      int y2 = v2.y;
-      int x3 = v3.x;
-      int y3 = v3.y;
-      DrawLine(x1, y1, x2, y2, c, col);
-      DrawLine(x2, y2, x3, y3, c, col);
-      DrawLine(x3, y3, x1, y1, c, col);
-  }
-
-  void fillBottomTriangle(Vertex v1, Vertex v2, Vertex v3) { //start at top, go ccw
-    //Need inverse slope to determine the change in x for every step in y
-      float slopeL = (v1.x - v2.x) / (v1.y - v2.y);
-      float slopeR = (v1.x - v3.x) / (v1.y - v3.y);
-      float xCurL = v2.x;
-      float xCurR = v3.x;
-
-      for (int scanY = v2.y; scanY <= v1.y; scanY++) {
-
-          DrawLine((int)xCurL, scanY, (int)xCurR, scanY);
-          xCurL += slopeL;
-          xCurR += slopeR;
-      }
+      if (y >= c.ScreenHeight())
+          y = c.ScreenHeight();
   }
 
   void Start()
@@ -303,16 +182,6 @@ public:
 
     // Wait for thread to be exited
     t.join();
-  }
-
-  int ScreenWidth()
-  {
-    return m_nScreenWidth;
-  }
-
-  int ScreenHeight()
-  {
-    return m_nScreenHeight;
   }
 
   virtual bool OnUserCreate() = 0;
@@ -439,7 +308,7 @@ private:
       wchar_t s[256];
       swprintf_s(s, 256,  m_sAppName.c_str(), 1.0f / fElapsedTime);
       SetConsoleTitle(s);
-      WriteConsoleOutput(m_hConsole, m_bufScreen, {(short)m_nScreenWidth, (short)m_nScreenHeight}, {0, 0}, &m_rectWindow);
+      WriteConsoleOutput(m_hConsole, m_bufScreen, {(short)c.ScreenWidth(), (short)c.ScreenHeight() }, {0, 0}, &m_rectWindow);
     }
   }
 
@@ -487,8 +356,7 @@ public:
   bool IsFocused() { return m_bConsoleInFocus; }
 
 protected:
-  int m_nScreenWidth;
-  int m_nScreenHeight;
+  Constants c;
   CHAR_INFO *m_bufScreen;
   std::wstring m_sAppName;
   HANDLE m_hOriginalConsole;
@@ -502,6 +370,8 @@ protected:
   bool m_mouseNewState[5] = {0};
   bool m_bConsoleInFocus = true;
   bool m_bEnableSound = false;
+  Vertex vCamera;
+  vector<object> objects;
 
   std::atomic<bool> m_bAtomActive;
   std::condition_variable m_cvGameFinished;
