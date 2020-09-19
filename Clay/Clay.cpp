@@ -7,41 +7,57 @@
 #include "clayGameEngine.h"
 #include <cstdlib>
 
+class Clay3D : public clayGameEngine
+{
+public:
+  Clay3D()
+  {
+    m_sAppName = L"Clay";
+  }
 
-class Clay3D : public clayGameEngine {
-	public:
-		Clay3D() {
-			m_sAppName = L"Clay";
-		}
+private:
+  float fTheta;
 
-	private:
-		float fTheta;
+  bool OnUserCreate() override
+  {
 
-		bool OnUserCreate() override {
+    object o;
+    o.LoadFromObjectFile("hbeef.obj");
+    objects.push_back(o);
+  }
 
-			object o;
-			o.LoadFromObjectFile("hbeef.obj");
-			objects.push_back(o);
-		}
+  bool OnUserUpdate(float fElapsedTime) override
+  {
+    //wipe screen each time
 
-		bool OnUserUpdate(float fElapsedTime) override {
-			//wipe screen each time
+    // fTheta += 1.0f * fElapsedTime;
+    Fill(0, 0, c.ScreenWidth(), c.ScreenHeight(), PIXEL_SOLID, FG_BLACK);
 
-			fTheta += 1.0f * fElapsedTime;
-			Fill(0, 0, c.ScreenWidth(), c.ScreenHeight(), PIXEL_SOLID, FG_BLACK);
+    objects[0].RotateZ(fTheta);
 
-			objects[0].RotateZ(fTheta);
+    //----------------------------Part 3-------------------
+    Transformation matRotZ;
+    Transformation matRotX;
+    Transformation transMat;
 
-			
-		}
+    matTrans.MakeTranslation(0.0f, 0.0f, 5.0f);
+    matRotX.RotateX(fTheta);
+    matRotZ.RotateZ(fTheta * 0.5f);
+
+    Transformation matWorld;
+    matWorld.MakeIdentity();
+    matWorld = MultiplyMatrix(matRotZ, matRotX);
+    matWorld = MultiplyMatrix(matWorld, matTrans);
+
+    //-------------------------------------------------------
+  }
 };
 
 int main()
 {
-	Clay3D clay;
-	if (clay.ConstructConsole(500, 500, 1, 1)) {
-		clay.Start();
-	}
-
+  Clay3D clay;
+  if (clay.ConstructConsole(500, 500, 1, 1))
+  {
+    clay.Start();
+  }
 }
-

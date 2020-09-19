@@ -60,14 +60,11 @@ enum PIXEL_TYPE
   PIXEL_QUARTER = 0x2591,
 };
 
-
-
 class clayGameEngine
 {
 public:
   clayGameEngine()
   {
-
 
     m_hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
     m_hConsoleIn = GetStdHandle(STD_INPUT_HANDLE);
@@ -80,7 +77,7 @@ public:
 
     m_sAppName = L"Default";
   }
-  
+
   int ConstructConsole(int width, int height, int fontw, int fonth)
   {
     if (m_hConsole == INVALID_HANDLE_VALUE)
@@ -146,32 +143,32 @@ public:
 
   void Draw(int x, int y, short ca = 0x2588, short col = 0x000F)
   {
-      if (x >= 0 && x < c.ScreenWidth() && y >= 0 && y < c.ScreenHeight())
-      {
-          m_bufScreen[y * c.ScreenWidth() + x].Char.UnicodeChar = ca;
-          m_bufScreen[y * c.ScreenWidth() + x].Attributes = col;
-      }
+    if (x >= 0 && x < c.ScreenWidth() && y >= 0 && y < c.ScreenHeight())
+    {
+      m_bufScreen[y * c.ScreenWidth() + x].Char.UnicodeChar = ca;
+      m_bufScreen[y * c.ScreenWidth() + x].Attributes = col;
+    }
   }
 
   void Fill(int x1, int y1, int x2, int y2, short c = 0x2588, short col = 0x000F)
   {
-      Clip(x1, y1);
-      Clip(x2, y2);
-      for (int x = x1; x < x2; x++)
-          for (int y = y1; y < y2; y++)
-              Draw(x, y, c, col);
+    Clip(x1, y1);
+    Clip(x2, y2);
+    for (int x = x1; x < x2; x++)
+      for (int y = y1; y < y2; y++)
+        Draw(x, y, c, col);
   }
 
-  void Clip(int& x, int& y)
+  void Clip(int &x, int &y)
   {
-      if (x < 0)
-          x = 0;
-      if (x >= c.ScreenWidth())
-          x = c.ScreenWidth();
-      if (y < 0)
-          y = 0;
-      if (y >= c.ScreenHeight())
-          y = c.ScreenHeight();
+    if (x < 0)
+      x = 0;
+    if (x >= c.ScreenWidth())
+      x = c.ScreenWidth();
+    if (y < 0)
+      y = 0;
+    if (y >= c.ScreenHeight())
+      y = c.ScreenHeight();
   }
 
   void Start()
@@ -190,9 +187,10 @@ public:
 private:
   void GameThread()
   {
-      if (!OnUserCreate()) {
-          m_bAtomActive = false;
-      }
+    if (!OnUserCreate())
+    {
+      m_bAtomActive = false;
+    }
 
     auto tp1 = chrono::system_clock::now();
     auto tp2 = chrono::system_clock::now();
@@ -306,9 +304,9 @@ private:
 
       // Update Title & Present Screen Buffer
       wchar_t s[256];
-      swprintf_s(s, 256,  m_sAppName.c_str(), 1.0f / fElapsedTime);
+      swprintf_s(s, 256, m_sAppName.c_str(), 1.0f / fElapsedTime);
       SetConsoleTitle(s);
-      WriteConsoleOutput(m_hConsole, m_bufScreen, {(short)c.ScreenWidth(), (short)c.ScreenHeight() }, {0, 0}, &m_rectWindow);
+      WriteConsoleOutput(m_hConsole, m_bufScreen, {(short)c.ScreenWidth(), (short)c.ScreenHeight()}, {0, 0}, &m_rectWindow);
     }
   }
 
@@ -337,7 +335,6 @@ protected:
 			*/
 
 protected:
-  
   struct sKeyState
   {
     bool bPressed;
