@@ -66,13 +66,19 @@ public:
     Vertex() {
         x = 0;
         y = 0;
+        z = 0;
     }
-    Vertex(int x1, int y1) {
+    Vertex(float x1, float y1) {
         x = x1;
         y = y1;
     }
+    Vertex(float x1, float y1, float z1) {
+        x = x1;
+        y = y1;
+        z = z1;
+    }
 
-    int x, y = 0;
+    float x, y, z = 0;
 };
 
 class clayGameEngine
@@ -188,87 +194,6 @@ public:
           y = m_nScreenHeight;
   }
 
-  /*
-  void DrawLine(int x1, int y1, int x2, int y2, short c = 0x2588, short col = 0x000F)
-  {
-      if (x1 > x2 && y1 > y1)
-      {
-          int x1copy = x1;
-          x1 = x2;
-          x2 = x1copy;
-
-          int y1copy = y1;
-          y1 = y2;
-          y2 = y1copy;
-      }
-      int dx, dy;
-      float error, slope;
-
-      dx = x2 - x1;
-      dy = y2 - y1;
-
-      if (dx == 0)
-      {
-          for (int y = y1; y < y2; y++)
-          {
-              Draw(x1, y, c, col);
-              return;
-          }
-      }
-
-      if (dy == 0)
-      {
-          for (int x = x1; x < x2; x++)
-          {
-              Draw(x, y1, c, col);
-              return;
-          }
-      }
-
-      error = -1.0f;
-      slope = abs(dy / dx);
-
-      if (dx >= dy)
-      {
-          int y = y1;
-          int yDir = y2 > y1 ? 1 : -1;
-
-          for (int x = x1; x < x2 - 1; x++)
-          {
-              error += slope;
-
-              if (error >= 0)
-              {
-                  y += yDir;
-                  error--;
-              }
-
-              Draw(x, y, c, col);
-          }
-      }
-      else if (dy >= dx)
-      {
-          int x = x1;
-          int xDir = x2 > x1 ? 1 : -1;
-
-          for (int y = y1; y < y2 - 1; y++)
-          {
-              error += slope;
-
-              if (error >= 0)
-              {
-                  x += xDir;
-                  error--;
-              }
-
-              Draw(x, y, c, col);
-          }
-      }
-  }
-
-  */
-
-
 
     void DrawLine(int x0, int y0, int x1, int y1, short c = 0x2588, short col = 0x000F) {
         if (y1 - y0 > 0 && y1- y0 < x1 - x0) {
@@ -333,8 +258,23 @@ public:
         }
     }
 
-  void DrawTriangle(int x1, int y1, int x2, int y2, int x3, int y3, short c = 0x2588, short col = 0x000F)
+    void Fill(int x1, int y1, int x2, int y2, short c = 0x2588, short col = 0x000F)
+    {
+        Clip(x1, y1);
+        Clip(x2, y2);
+        for (int x = x1; x < x2; x++)
+            for (int y = y1; y < y2; y++)
+                Draw(x, y, c, col);
+    }
+
+  void DrawTriangle(Vertex v1, Vertex v2, Vertex v3, short c = 0x2588, short col = 0x000F)
   {
+      int x1 = v1.x;
+      int y1 = v1.y;
+      int x2 = v2.x;
+      int y2 = v2.y;
+      int x3 = v3.x;
+      int y3 = v3.y;
       DrawLine(x1, y1, x2, y2, c, col);
       DrawLine(x2, y2, x3, y3, c, col);
       DrawLine(x3, y3, x1, y1, c, col);
