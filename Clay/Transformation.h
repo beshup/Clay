@@ -2,9 +2,7 @@
 
 class Transformation : public Constants {
 	public:
-		Transformation() {
-
-		}
+		Transformation() {}
 		// if you wish to rotate, will have to make special call
 
 		Transformation(string inputName) {
@@ -15,6 +13,8 @@ class Transformation : public Constants {
 				float fFar = 2500.0f;
 				float fFov = 90.0f;
 				float fAspectRatio = (float)ScreenHeight() / (float)ScreenWidth();
+
+
 				// degrees to rad
 				float fFovRad = 1.0f / tanf(fFov * 0.5f / 180.0f * 3.141519f);
 
@@ -28,12 +28,21 @@ class Transformation : public Constants {
 			}
 		}
 		void RotateX(float fTheta) {
-			matrix[0][0] = 1;
+			matrix[0][0] = 1f;
 			matrix[1][1] = cosf(fTheta * 0.5f);
 			matrix[1][2] = sinf(fTheta * 0.5f);
 			matrix[2][1] = -sinf(fTheta * 0.5f);
 			matrix[2][2] = cosf(fTheta * 0.5f);
-			matrix[3][3] = 1;
+			matrix[3][3] = 1f;
+		}
+
+		void RotateY(float fTheta) {
+			matrix[0][0] = cosf(fTheta);
+			matrix[0][1] = sinf(fTheta);
+			matrix[1][0] = -sinf(fTheta);
+			matrix[1][1] = 1f;
+			matrix[2][2] = cosf(fTheta);
+			matrix[3][3] = 1f;
 		}
 
 		void RotateZ(float fTheta) {
@@ -41,13 +50,42 @@ class Transformation : public Constants {
 			matrix[0][1] = sinf(fTheta);
 			matrix[1][0] = -sinf(fTheta);
 			matrix[1][1] = cosf(fTheta);
-			matrix[2][2] = 1;
-			matrix[3][3] = 1;
+			matrix[2][2] = 1f;
+			matrix[3][3] = 1f;
+		}
+
+		void translate(float x, float y, float z) {
+			matrix[0][0] = 1f;
+			matrix[1][1] = 1f;
+			matrix[2][2] = 1f;
+			matrix[3][3] = 1f;
+			matrix[3][0] = x;
+			matrix[3][1] = y;
+			matrix[3][2] = z;
+		}
+
+		void project(float fFov, float fAspectRatio, float fNear, float fFar) {
+			float fFovRad = 1.0f / tanf(fFov * 0.5f / 180.0f * 3.141519f);
+			matrix[0][0] = fAspectRatio * fFovRad;
+			matrix[1][1] = fFovRad;
+			matrix[2][2] = fFar / (fFar - fNear);
+			matrix[3][2] = (-fFar * fNear) / (fFar - fNear);
+			matrix[2][3] = 1.0f;
+			matrix[3][3] = 0.0f;
+		}
+
+		void makeIdentity(float fTheta) {
+			Transformation matrix[4][4];
+			matrix[0][0] = 1f;
+			matrix[1][1] = 1f;
+			matrix[2][2] = 1f;
+			matrix[3][3] = 1f;
 		}
 
 		float matrix[4][4] = { 0 };
 		string name = "";
+		
 
-	private:
+
 		
 };
