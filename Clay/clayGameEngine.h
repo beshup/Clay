@@ -367,7 +367,7 @@ protected:
   bool m_mouseNewState[5] = {0};
   bool m_bConsoleInFocus = true;
   bool m_bEnableSound = false;
-  Vertex vCamera;
+  Vertex vCamera = { 0.0f, 0.0f, -1.0f };
 
   std::atomic<bool> m_bAtomActive;
   std::condition_variable m_cvGameFinished;
@@ -439,6 +439,45 @@ protected:
                 return newObj;
             }
 
+            bool illumination(Vertex vCamera, tri triangle) {
+                Vertex normal, line, line1;
+
+                //calculate each line
+                line.x = triangle.vertices[1].x - triangle.vertices[0].x;
+                line.y = triangle.vertices[1].y - triangle.vertices[0].y;
+                line.z = triangle.vertices[1].z - triangle.vertices[0].z;
+
+                line1.x = triangle.vertices[2].x - triangle.vertices[0].x;
+                line1.z = triangle.vertices[2].z - triangle.vertices[0].z;
+                line1.y = triangle.vertices[2].y - triangle.vertices[0].y;
+
+                Math m;
+                Constants con;
+                normal = m.normalize(m.crossProduct(line, line1));
+
+                // projecting from 3D to 2D
+                if (normal.x * (triangle.vertices[0].x - vCamera.x) +
+                    normal.y * (triangle.vertices[0].y - vCamera.y) +
+                    normal.z * (triangle.vertices[0].z - vCamera.z) <
+                    0.0)
+                {
+
+                    //rudimentary illumination
+                    Vertex light = { 0.0f, 0.0f, -1.0f };
+
+                    m.normalize(light);
+
+                    float dotproduct = m.dotProduct(normal, light);
+
+                    CHAR_INFO c = con.GetColor(dotproduct);
+                    triangle.col = c.Attributes;
+                    triangle.sym = c.Char.UnicodeChar;
+
+                    return true;
+                }
+                return false;
+            }
+
             void RotateZ(float fTheta, object o) {
                 vector<tri> toBeRasterized;
                 //  vector<unique_ptr<tri>> tbrForSort;
@@ -446,6 +485,21 @@ protected:
                     triangle.RotateZ(fTheta);
                     triangle.ThreeDtoTwoD(vCamera);
                     toBeRasterized.push_back(triangle);
+                    //  tbrForSort.push_back(make_unique<tri>(triangle));
+                }
+                Rasterize(toBeRasterized);
+            }
+
+            void RotateZX(float fTheta, object o) {
+                vector<tri> toBeRasterized;
+                //  vector<unique_ptr<tri>> tbrForSort;
+                for (auto& triangle : o.tris) {
+                    triangle.RotateZ(fTheta);
+                    triangle.RotateX(fTheta);
+                    if (illumination(vCamera, triangle)) {
+                        triangle.ThreeDtoTwoD(vCamera);
+                        toBeRasterized.push_back(triangle);
+                    }
                     //  tbrForSort.push_back(make_unique<tri>(triangle));
                 }
                 Rasterize(toBeRasterized);
@@ -484,10 +538,11 @@ protected:
                         triProjected.vertices[1],
                         triProjected.vertices[2],
                         PIXEL_SOLID,
-                        FG_DARK_RED);
+                        FG_WHITE);
                 }
             }
 
+            
             void DrawLine(int x0, int y0, int x1, int y1, short c = 0x2588, short col = 0x000F) {
                 if (y1 - y0 > 0 && y1 - y0 < x1 - x0) {
                     Bresenham(x0, y0, x1, y1, c, col);
@@ -496,6 +551,7 @@ protected:
                     DDA(x0, y0, x1, y1, c, col);
                 }
             }
+            
 
             void Bresenham(int x0, int y0, int x1, int y1, short c = 0x2588, short col = 0x000F) {
                 int dx, dy, p, x, y;

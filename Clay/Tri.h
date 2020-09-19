@@ -23,7 +23,6 @@ class tri : public Constants {
 
 		void ThreeDtoTwoD(Vertex vCamera) {
 			offset();
-			illumination(vCamera);
 			for (int i = 0; i < 3; i++) {
 				Transformation t1("projected");
 				vertices[i].MultiplyMatrixVector(t1);
@@ -33,46 +32,18 @@ class tri : public Constants {
 			unNormalization();
 		}
 
-		void illumination(Vertex vCamera) {
-			Vertex normal, line, line1;
-
-			//calculate each line
-			line.x = vertices[1].x - vertices[0].x;
-			line.y = vertices[1].y - vertices[0].y;
-			line.z = vertices[1].z - vertices[0].z;
-
-			line1.x = vertices[2].x - vertices[0].x;
-			line1.z = vertices[2].z - vertices[0].z;
-			line1.y = vertices[2].y - vertices[0].y;
-
-			Math m;
-			Constants con;
-			normal = m.normalize(m.crossProduct(line, line1));
-
-			// projecting from 3D to 2D
-			if (normal.x * (vertices[0].x - vCamera.x) +
-				normal.y * (vertices[0].y - vCamera.y) +
-				normal.z * (vertices[0].z - vCamera.z) <
-				0.0)
-			{
-
-				//rudimentary illumination
-				Vertex light = { 0.0f, 0.0f, -1.0f };
-
-				m.normalize(light);
-
-				float dotproduct = m.dotProduct(normal, light);
-
-				CHAR_INFO c = con.GetColor(dotproduct);
-				col = c.Attributes;
-				sym = c.Char.UnicodeChar;
-			}
-		}
-
 		void RotateZ(float fTheta) {
 			for (int i = 0; i < 3; i++) {
 				Transformation t1;
 				t1.RotateZ(fTheta);
+				vertices[i].MultiplyMatrixVector(t1);
+			}
+		}
+
+		void RotateX(float fTheta) {
+			for (int i = 0; i < 3; i++) {
+				Transformation t1;
+				t1.RotateX(fTheta);
 				vertices[i].MultiplyMatrixVector(t1);
 			}
 		}
