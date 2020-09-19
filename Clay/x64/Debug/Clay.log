@@ -1,49 +1,81 @@
 ﻿  Clay.cpp
-<<<<<<< HEAD
-C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\clayGameEngine.h(598,25): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\clayGameEngine.h(599,25): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\clayGameEngine.h(602,29): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\clayGameEngine.h(602,26): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\clayGameEngine.h(612,24): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\clayGameEngine.h(613,24): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\clayGameEngine.h(614,24): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\clayGameEngine.h(615,24): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\clayGameEngine.h(616,24): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\clayGameEngine.h(617,24): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\clayGameEngine.h(630,32): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-  Clay.vcxproj -> C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\x64\Debug\Clay.exe
-=======
-C:\Users\erfan\GameEngine\Clay\Clay\Constants.h(71,27): error C3646: 'GetColor': unknown override specifier
-C:\Users\erfan\GameEngine\Clay\Clay\Constants.h(71,27): error C2059: syntax error: '('
-C:\Users\erfan\GameEngine\Clay\Clay\Constants.h(72,9): error C2334: unexpected token(s) preceding '{'; skipping apparent function body
-C:\Users\erfan\GameEngine\Clay\Clay\Tri.h(3,35): error C2504: 'clayGameEngine': base class undefined
-C:\Users\erfan\GameEngine\Clay\Clay\Tri.h(45,36): error C2065: 'vCamera': undeclared identifier
-C:\Users\erfan\GameEngine\Clay\Clay\Tri.h(46,33): error C2065: 'vCamera': undeclared identifier
-C:\Users\erfan\GameEngine\Clay\Clay\Tri.h(47,33): error C2065: 'vCamera': undeclared identifier
-C:\Users\erfan\GameEngine\Clay\Clay\Tri.h(58,5): error C2065: 'CHAR_INFO': undeclared identifier
-C:\Users\erfan\GameEngine\Clay\Clay\Tri.h(58,15): error C2146: syntax error: missing ';' before identifier 'c'
-C:\Users\erfan\GameEngine\Clay\Clay\Tri.h(58,15): error C2065: 'c': undeclared identifier
-C:\Users\erfan\GameEngine\Clay\Clay\Tri.h(58,23): error C2039: 'GetColor': is not a member of 'Constants'
-C:\Users\erfan\GameEngine\Clay\Clay\Constants.h(3): message : see declaration of 'Constants'
-C:\Users\erfan\GameEngine\Clay\Clay\Tri.h(59,11): error C2065: 'c': undeclared identifier
-C:\Users\erfan\GameEngine\Clay\Clay\Tri.h(60,11): error C2065: 'c': undeclared identifier
-C:\Users\erfan\GameEngine\Clay\Clay\Tri.h(76,36): error C2065: 'c': undeclared identifier
-C:\Users\erfan\GameEngine\Clay\Clay\Tri.h(77,36): error C2065: 'c': undeclared identifier
-C:\Users\erfan\GameEngine\Clay\Clay\Object.h(7,38): error C2504: 'clayGameEngine': base class undefined
-C:\Users\erfan\GameEngine\Clay\Clay\Object.h(99,14): error C3668: 'object::OnUserCreate': method with override specifier 'override' did not override any base class methods
-C:\Users\erfan\GameEngine\Clay\Clay\Object.h(103,14): error C3668: 'object::OnUserUpdate': method with override specifier 'override' did not override any base class methods
-C:\Users\erfan\GameEngine\Clay\Clay\Object.h(93,21): error C2065: 'PIXEL_SOLID': undeclared identifier
-C:\Users\erfan\GameEngine\Clay\Clay\Object.h(94,21): error C2065: 'FG_DARK_RED': undeclared identifier
-C:\Users\erfan\GameEngine\Clay\Clay\Object.h(132,21): error C3861: 'Draw': identifier not found
-C:\Users\erfan\GameEngine\Clay\Clay\Object.h(138,21): error C3861: 'Draw': identifier not found
-C:\Users\erfan\GameEngine\Clay\Clay\Object.h(159,21): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-C:\Users\erfan\GameEngine\Clay\Clay\Object.h(160,21): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-C:\Users\erfan\GameEngine\Clay\Clay\Object.h(163,17): error C3861: 'Draw': identifier not found
-C:\Users\erfan\GameEngine\Clay\Clay\Object.h(173,20): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-C:\Users\erfan\GameEngine\Clay\Clay\Object.h(174,20): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-C:\Users\erfan\GameEngine\Clay\Clay\Object.h(175,20): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-C:\Users\erfan\GameEngine\Clay\Clay\Object.h(176,20): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-C:\Users\erfan\GameEngine\Clay\Clay\Object.h(177,20): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-C:\Users\erfan\GameEngine\Clay\Clay\Object.h(178,20): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-C:\Users\erfan\GameEngine\Clay\Clay\Object.h(191,28): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
->>>>>>> test
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\Transformation.h(76,24): error C2061: syntax error: identifier 'Vertex'
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\Transformation.h(45,16): error C2039: 'MakeTranslation': is not a member of 'Transformation'
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\Transformation.h(3): message : see declaration of 'Transformation'
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\Transformation.h(50,16): error C3861: 'MultiplyMatrix': identifier not found
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\Transformation.h(51,16): error C3861: 'MultiplyMatrix': identifier not found
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\Transformation.h(78,5): error C2065: 'Math': undeclared identifier
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\Transformation.h(78,10): error C2146: syntax error: missing ';' before identifier 'm'
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\Transformation.h(78,10): error C2065: 'm': undeclared identifier
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\Transformation.h(81,5): error C2065: 'Vertex': undeclared identifier
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\Transformation.h(81,12): error C2146: syntax error: missing ';' before identifier 'newForward'
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\Transformation.h(81,12): error C2065: 'newForward': undeclared identifier
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\Transformation.h(81,25): error C2065: 'm': undeclared identifier
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\Transformation.h(81,37): error C2065: 'm': undeclared identifier
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\Transformation.h(81,49): error C2065: 'target': undeclared identifier
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\Transformation.h(81,57): error C2065: 'position': undeclared identifier
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\Transformation.h(84,5): error C2065: 'Vertex': undeclared identifier
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\Transformation.h(84,12): error C2146: syntax error: missing ';' before identifier 'tempU'
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\Transformation.h(84,12): error C2065: 'tempU': undeclared identifier
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\Transformation.h(84,20): error C2065: 'm': undeclared identifier
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\Transformation.h(84,43): error C2065: 'newForward': undeclared identifier
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\Transformation.h(84,55): error C2065: 'm': undeclared identifier
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\Transformation.h(84,68): error C2065: 'up': undeclared identifier
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\Transformation.h(84,72): error C2065: 'newForward': undeclared identifier
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\Transformation.h(85,5): error C2065: 'Vertex': undeclared identifier
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\Transformation.h(85,12): error C2146: syntax error: missing ';' before identifier 'newUpward'
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\Transformation.h(85,12): error C2065: 'newUpward': undeclared identifier
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\Transformation.h(85,24): error C2065: 'm': undeclared identifier
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\Transformation.h(85,36): error C2065: 'm': undeclared identifier
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\Transformation.h(85,48): error C2065: 'up': undeclared identifier
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\Transformation.h(85,52): error C2065: 'tempU': undeclared identifier
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\Transformation.h(88,5): error C2065: 'Vertex': undeclared identifier
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\Transformation.h(88,12): error C2146: syntax error: missing ';' before identifier 'newRight'
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\Transformation.h(88,12): error C2065: 'newRight': undeclared identifier
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\Transformation.h(88,23): error C2065: 'm': undeclared identifier
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\Transformation.h(88,38): error C2065: 'newUpward': undeclared identifier
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\Transformation.h(88,49): error C2065: 'newForward': undeclared identifier
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\Transformation.h(91,21): error C2065: 'newRight': undeclared identifier
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\Transformation.h(92,21): error C2065: 'newRight': undeclared identifier
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\Transformation.h(93,21): error C2065: 'newRight': undeclared identifier
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\Transformation.h(95,21): error C2065: 'newUpward': undeclared identifier
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\Transformation.h(96,21): error C2065: 'newUpward': undeclared identifier
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\Transformation.h(97,21): error C2065: 'newUpward': undeclared identifier
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\Transformation.h(99,21): error C2065: 'newForward': undeclared identifier
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\Transformation.h(100,21): error C2065: 'newForward': undeclared identifier
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\Transformation.h(101,21): error C2065: 'newForward': undeclared identifier
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\Transformation.h(103,21): error C2065: 'position': undeclared identifier
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\Transformation.h(104,21): error C2065: 'position': undeclared identifier
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\Transformation.h(105,21): error C2065: 'position': undeclared identifier
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\Transformation.h(112,5): error C2065: 'Math': undeclared identifier
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\Transformation.h(112,10): error C2146: syntax error: missing ';' before identifier 'm1'
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\Transformation.h(112,10): error C2065: 'm1': undeclared identifier
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\Transformation.h(113,5): error C2065: 'Vertex': undeclared identifier
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\Transformation.h(113,12): error C2146: syntax error: missing ';' before identifier 'vView'
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\Transformation.h(113,12): error C2065: 'vView': undeclared identifier
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\Transformation.h(114,5): error C2065: 'Vertex': undeclared identifier
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\Transformation.h(114,12): error C2146: syntax error: missing ';' before identifier 'vUp'
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\Transformation.h(114,12): error C2065: 'vUp': undeclared identifier
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\Transformation.h(115,5): error C2065: 'Vertex': undeclared identifier
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\Transformation.h(115,12): error C2146: syntax error: missing ';' before identifier 'vTarget'
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\Transformation.h(115,12): error C2065: 'vTarget': undeclared identifier
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\Transformation.h(115,22): error C2065: 'm1': undeclared identifier
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\Transformation.h(115,35): error C2065: 'vCamera': undeclared identifier
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\Transformation.h(115,44): error C2065: 'vView': undeclared identifier
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\Transformation.h(116,14): error C2065: 'vCamera': undeclared identifier
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\Transformation.h(116,23): error C2065: 'vTarget': undeclared identifier
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\Transformation.h(116,32): error C2065: 'vUp': undeclared identifier
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\Transformation.h(117,13): error C2065: 'm1': undeclared identifier
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\Tri.h(25,1): error C2660: 'tri::offset': function does not take 0 arguments
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\Tri.h(67,8): message : see declaration of 'tri::offset'
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\clayGameEngine.h(590,25): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\clayGameEngine.h(591,25): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\clayGameEngine.h(594,29): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\clayGameEngine.h(594,26): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\clayGameEngine.h(604,24): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\clayGameEngine.h(605,24): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\clayGameEngine.h(606,24): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\clayGameEngine.h(607,24): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\clayGameEngine.h(608,24): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\clayGameEngine.h(609,24): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\clayGameEngine.h(622,32): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
