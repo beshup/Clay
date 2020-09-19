@@ -1,39 +1,76 @@
-#include "clayGameEngine.h"
-#include <cstdlib>
+using namespace std;
+
+#include <windows.h>
+#include <vector>
+#include <fstream>
+#include <strstream>
+#include <algorithm>
+#include <cmath>
+#include <string>
 #include <iostream>
+#include <chrono>
+#include <list>
+#include <thread>
+#include <atomic>
+#include <condition_variable>
+#include <cstdlib>
 
-struct tri {
-	Vertex vertices[3];
-};
+#include "Constants.h"
+#include "Transformation.h"
+#include "Vertex.h"
+#include "clayGameEngine.h"
+#include "Math.h"
+#include "Tri.h"
+#include "Object.h"
 
-struct mesh {
-	vector<tri> tris;
-};
 
-class Clay3D :public clayGameEngine {
+class Clay3D : public clayGameEngine {
 	public:
 		Clay3D() {
-			m_sAppName = L"3D Demo";
+			m_sAppName = L"Clay";
 		}
 
-		bool OnUserCreate() override {
+		vector<object> objects;
 
-			//meshCube.tris = {
-
-			//}
-			
-			return true;
-		}
-
-		bool OnUserUpdate(float fElapsedTime) override {
-			Vertex a = Vertex(450, 400);
-			Vertex b = Vertex(200, 300);
-			Vertex c = Vertex(300, 300);
-			fillBottomTriangle(a, b, c);
-			return true;
-		}
 	private:
-		mesh meshCube;
+		float fTheta;
+
+		bool OnUserCreate() {
+
+			object o;
+			//o.LoadFromObjectFile("hbeef.obj");
+			Vertex v1(0.0f, 0.0f, 0.0f);
+			Vertex v2(0.0f, 1.0f, 0.0f);
+			Vertex v3(1.0f, 1.0f, 0.0f);
+			tri t1(v1, v2, v3);
+
+			Vertex v4(1.0f, 1.0f, 0.0f);
+			Vertex v5(1.0f, 0.0f, 0.0f);
+			Vertex v6(1.0f, 0.0f, 0.0f);
+			tri t2(v4, v5, v6);
+
+			Vertex v7(1.0f, 0.0f, 1.0f);
+			Vertex v8(0.0f, 1.0f, 0.0f);
+			Vertex v9(1.0f, 1.0f, 1.0f);
+			tri t3(v7, v8, v9);
+
+			o.tris.push_back(t1);
+			o.tris.push_back(t2);
+			o.tris.push_back(t3);
+
+			objects.push_back(o);
+		}
+
+		bool OnUserUpdate(float fElapsedTime) {
+			//wipe screen each time
+
+			fTheta += 1.0f * fElapsedTime;
+			Fill(0, 0, c.ScreenWidth(), c.ScreenHeight(), PIXEL_SOLID, FG_BLACK);
+
+			objects[0].RotateZ(fTheta);
+
+			
+		}
 };
 
 int main()
