@@ -22,7 +22,6 @@ class tri : public Constants {
 		}
 
 		void ThreeDtoTwoD(Vertex vCamera) {
-			offset(3.0f);
 			for (int i = 0; i < 3; i++) {
 				Transformation t1("projected");
 				MatrixMath m;
@@ -30,6 +29,7 @@ class tri : public Constants {
 			}
 			// missing col?
 			add1();
+			offset(3.0f);
 			unNormalization();
 		}
 

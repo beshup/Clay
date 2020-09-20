@@ -58,4 +58,6 @@ public:
   {
     return {a.x / k, a.y / k, a.z / k};
   }
+
+  
 };

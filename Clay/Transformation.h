@@ -61,52 +61,6 @@ public:
     matrix[3][3] = 1;
   }
 
-  /*
-  void PointMat(Vertex &position, Vertex &target, Vertex &up)
-  {
-    Math m;
-
-    //calculate forward direction
-    Vertex newForward = m.normalize(m.VectorSub(target, position));
-
-    //Calculate upward direction
-    Vertex tempU = m.VectorMultiplication(newForward, m.dotProduct(up, newForward));
-    Vertex newUpward = m.normalize(m.VectorSub(up, tempU));
-
-    //Calculate right direction
-    Vertex newRight = m.crossProduct(newUpward, newForward);
-
-    //point at matrix
-    mCamera[0][0] = newRight.x;
-    mCamera[0][1] = newRight.y;
-    mCamera[0][2] = newRight.z;
-    mCamera[0][3] = 0;
-    mCamera[1][0] = newUpward.x;
-    mCamera[1][1] = newUpward.y;
-    mCamera[1][2] = newUpward.z;
-    mCamera[1][3] = 0;
-    mCamera[2][0] = newForward.x;
-    mCamera[2][1] = newForward.y;
-    mCamera[2][2] = newForward.z;
-    mCamera[2][3] = 0;
-    mCamera[3][0] = position.x;
-    mCamera[3][1] = position.y;
-    mCamera[3][2] = position.z;
-    mCamera[3][3] = 1.0f;
-  }
-  */
-/*
-  void doThings(float mView[4][4], float nCamera[4][4])
-  {
-    //idk where this shit goes: red because wrong place
-    MatrixMath m1;
-    Vertex vView = {0.0f, 0.0f, 1.0f};
-    Vertex vUp = {0.0f, 1.0f, 0.0f};
-    Vertex vTarget = m1.VectorAdd(vCamera, vView);
-    PointMat(vCamera, vTarget, vUp);
-    mView = m1.Invert(mCamera);
-  }
-  */
   
   void translate(float x, float y, float z) {
 			matrix[0][0] = 1.0f;
@@ -136,8 +90,6 @@ public:
 		}
 
 
-  float mView[4][4] = {0};
-  float mCamera[4][4] = {0};
   float matrix[4][4] = {0};
   string name = "";
 

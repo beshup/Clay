@@ -329,6 +329,135 @@ protected:
 				return true;
 			}
 			*/
+    public: 
+        void PointMat(Vertex& position, Vertex& target, Vertex& up)
+        {
+            Math m;
+
+            //calculate forward direction
+            Vertex newForward = m.normalize(m.VectorSub(target, position));
+
+            //Calculate upward direction
+            Vertex tempU = m.VectorMultiplication(newForward, m.dotProduct(up, newForward));
+            Vertex newUpward = m.normalize(m.VectorSub(up, tempU));
+
+            //Calculate right direction
+            Vertex newRight = m.crossProduct(newUpward, newForward);
+
+            //point at matrix
+            mCamera.matrix[0][0] = newRight.x;
+            mCamera.matrix[0][1] = newRight.y;
+            mCamera.matrix[0][2] = newRight.z;
+            mCamera.matrix[0][3] = 0;
+            mCamera.matrix[1][0] = newUpward.x;
+            mCamera.matrix[1][1] = newUpward.y;
+            mCamera.matrix[1][2] = newUpward.z;
+            mCamera.matrix[1][3] = 0;
+            mCamera.matrix[2][0] = newForward.x;
+            mCamera.matrix[2][1] = newForward.y;
+            mCamera.matrix[2][2] = newForward.z;
+            mCamera.matrix[2][3] = 0;
+            mCamera.matrix[3][0] = position.x;
+            mCamera.matrix[3][1] = position.y;
+            mCamera.matrix[3][2] = position.z;
+            mCamera.matrix[3][3] = 1.0f;
+        }
+        void Invert()
+        {
+               mView.matrix[0][0] = mCamera.matrix[0][0];
+               mView.matrix[0][1] = mCamera.matrix[1][0];
+               mView.matrix[0][2] = mCamera.matrix[2][0];
+               mView.matrix[0][3] = 0.0f;
+               mView.matrix[1][0] = mCamera.matrix[0][1];
+               mView.matrix[1][1] = mCamera.matrix[1][1];
+               mView.matrix[1][2] = mCamera.matrix[2][1];
+               mView.matrix[1][3] = 0.0f;
+               mView.matrix[2][0] = mCamera.matrix[0][2];
+               mView.matrix[2][1] = mCamera.matrix[1][2];
+               mView.matrix[2][2] = mCamera.matrix[2][2];
+               mView.matrix[2][3] = 0.0f;
+               mView.matrix[3][0] = -(mCamera.matrix[3][0] *mView.matrix[0][0] + mCamera.matrix[3][1] *mView.matrix[1][0] + mCamera.matrix[3][2] *mView.matrix[2][0]);
+               mView.matrix[3][1] = -(mCamera.matrix[3][0] *mView.matrix[0][1] + mCamera.matrix[3][1] *mView.matrix[1][1] + mCamera.matrix[3][2] *mView.matrix[2][1]);
+               mView.matrix[3][2] = -(mCamera.matrix[3][0] *mView.matrix[0][2] + mCamera.matrix[3][1] *mView.matrix[1][2] + mCamera.matrix[3][2] *mView.matrix[2][2]);
+               mView.matrix[3][3] = 1.0f;
+        }
+
+
+
+        void Navigation()
+        {
+            Math m1;
+            MatrixMath m2;
+            Vertex vTarget = { 0.0f, 0.0f, 1.0f };
+            Vertex vUp = { 0.0f, 1.0f, 0.0f };
+   
+            Transformation t1;
+            Vertex temp = vTarget;
+            t1.RotateY(yaw);
+            m2.MultiplyMatrixVector(t1, temp);
+            vView = temp;
+            vTarget = m1.VectorAdd(vCamera, vView);
+
+            PointMat(vCamera, vTarget, vUp);
+            Invert();
+        }
+
+        void Input(float fElapsedTime) {
+            Math m;
+            /*
+            if (GetKey(VK_UP).bHeld)
+                Vertex vForward = m.VectorMultiplication(vView, 8.0f * fElapsedTime);
+            if (GetKey(VK_DOWN).bHeld)
+                vCamera.y -= 8.0f * fElapsedTime;
+            if (GetKey(VK_LEFT).bHeld)
+                vCamera.x -= 8.0f * fElapsedTime;
+            if (GetKey(VK_RIGHT).bHeld)
+                vCamera.x += 8.0f * fElapsedTime;
+
+            Vertex vForward = m.VectorMultiplication(vView, 2.0f * fElapsedTime);
+            if (GetKey(L'A').bHeld)
+                vCamera = m.VectorAdd(vCamera, vForward);
+            if (GetKey(L'D').bHeld)
+                vCamera = m.VectorSub(vCamera, vForward);
+            if (GetKey(L'W').bHeld)
+                vCamera.y += 2.0f * fElapsedTime;
+            if (GetKey(L'S').bHeld)
+                vCamera.y -= 2.0f * fElapsedTime;
+
+            */
+
+            if (GetKey(VK_UP).bHeld)
+                vCamera.y += 8.0f * fElapsedTime;	// Travel Upwards
+
+            if (GetKey(VK_DOWN).bHeld)
+                vCamera.y -= 8.0f * fElapsedTime;	// Travel Downwards
+
+
+            // Dont use these two in FPS mode, it is confusing :P
+            if (GetKey(VK_LEFT).bHeld)
+                vCamera.x -= 8.0f * fElapsedTime;	// Travel Along X-Axis
+
+            if (GetKey(VK_RIGHT).bHeld)
+                vCamera.x += 8.0f * fElapsedTime;	// Travel Along X-Axis
+            ///////
+
+
+            Vertex vForward = m.VectorMultiplication(vView, 8.0f * fElapsedTime);
+
+            // Standard FPS Control scheme, but turn instead of strafe
+            if (GetKey(L'W').bHeld)
+                vCamera = m.VectorAdd(vCamera, vForward);
+
+            if (GetKey(L'S').bHeld)
+                vCamera = m.VectorSub(vCamera, vForward);
+
+            if (GetKey(L'A').bHeld)
+                yaw -= 2.0f * fElapsedTime;
+
+            if (GetKey(L'D').bHeld)
+                yaw += 2.0f * fElapsedTime;
+
+        }
 
 protected:
   struct sKeyState
@@ -365,6 +494,10 @@ protected:
   bool m_bConsoleInFocus = true;
   bool m_bEnableSound = false;
   Vertex vCamera = { 0.0f, 0.0f, -1.0f };
+  Vertex vView = { 0.0f, 0.0f, 1.0f };
+  Transformation mView;
+  Transformation mCamera;
+  float yaw;
 
   std::atomic<bool> m_bAtomActive;
   std::condition_variable m_cvGameFinished;
@@ -436,14 +569,14 @@ protected:
                 return newObj;
             }
 
-            bool illumination(Vertex vCamera, tri triangle) {
+            bool illumination(Vertex vCamera, tri &triangle) {
                 Vertex normal, line, line1;
 
                 //calculate each line
                 Math m;
                 Constants con;
-                line = m.VectorSub(triangle.vertices[1], triangle.vertices[0]);
-                line1 = m.VectorSub(triangle.vertices[2], triangle.vertices[0]);
+                line = m.VectorSub(triangle.vertices[0], triangle.vertices[1]);
+                line1 = m.VectorSub(triangle.vertices[2], triangle.vertices[1]);
 
                 normal = m.normalize(m.crossProduct(line, line1));
 
@@ -452,15 +585,15 @@ protected:
                 Vertex vCameraRay = m.VectorSub(triangle.vertices[0], vCamera);
                 
                 if (m.dotProduct(normal, vCameraRay) <
-                    0.0)
+                    0.0f)
                 { 
 
                   //rudimentary illumination
-                  Vertex light = {0.0f, 0.0f, -1.0f};
+                  Vertex light = {0.0f, 1.0f, -1.0f};
 
                   m.normalize(light);
 
-                  float dotproduct = m.dotProduct(normal, light);
+                  float dotproduct = max(0.1f, m.dotProduct(normal, light));
 
                   CHAR_INFO c = con.GetColor(dotproduct);
                   triangle.col = c.Attributes;
@@ -472,12 +605,21 @@ protected:
                return false;
             }
 
+            void WorldToViewSpace(tri &triangle) {
+                Navigation();
+                MatrixMath m1;
+                for (int i = 0; i < 3; i++) {
+                    m1.MultiplyMatrixVector(mView, triangle.vertices[i]);
+                }
+            }
+
             void RotateZ(float fTheta, object o) {
                 vector<tri> toBeRasterized;
-                //  vector<unique_ptr<tri>> tbrForSort;
+                vector<unique_ptr<tri>> tbrForSort;
                 for (auto& triangle : o.tris) {
                     triangle.RotateZ(fTheta);
                     if (illumination(vCamera, triangle)) {
+                        WorldToViewSpace(triangle);
                         triangle.ThreeDtoTwoD(vCamera);
                         toBeRasterized.push_back(triangle);
                     }
@@ -488,51 +630,41 @@ protected:
 
             void RotateZX(float fTheta, object o) {
                 vector<tri> toBeRasterized;
-                //  vector<unique_ptr<tri>> tbrForSort;
+                vector<unique_ptr<tri>> tbrForSort;
                 for (auto& triangle : o.tris) {
-                    triangle.RotateZ(fTheta);
-                    triangle.RotateX(fTheta);
+                   // triangle.RotateZ(fTheta);
+                   // triangle.RotateX(fTheta);
                     if (illumination(vCamera, triangle)) {
+                        WorldToViewSpace(triangle);
                         triangle.ThreeDtoTwoD(vCamera);
                         toBeRasterized.push_back(triangle);
+                       // tbrForSort.push_back(make_unique<tri>(triangle));
+
                     }
-                    //  tbrForSort.push_back(make_unique<tri>(triangle));
                 }
                 Rasterize(toBeRasterized);
             }
 
-            /*
-            static bool sortByMid(const unique_ptr<tri>& a, const unique_ptr<tri>& b) {
-                float z1Midpoint = 0.0;
-                float z2Midpoint = 0.0;
-                for (int i = 0; i < 3; i++)
-                {
-                    z1Midpoint += a->vertices[i].z;
-                    z2Midpoint += b->vertices[i].z;
-                }
-                z1Midpoint /= 3.0f;
-                z2Midpoint /= 3.0f;
-
-                return z1Midpoint > z2Midpoint;
-            }
-            */
+           
+            
 
             void Rasterize(vector<tri> toBeRasterized) {
-                // sort(tbrForSort.begin(), tbrForSort.end(), sortByMid);
+                sort(toBeRasterized.begin(), toBeRasterized.end(), [](tri& t1, tri& t2)
+                    {
+                        float z1 = (t1.vertices[0].z + t1.vertices[1].z + t1.vertices[2].z) / 3.0f;
+                        float z2 = (t2.vertices[0].z + t2.vertices[1].z + t2.vertices[2].z) / 3.0f;
+                        return z1 > z2;
+                  });
 
                 for (auto& triProjected : toBeRasterized)
                 {
 
-                    //just the 3 lines after one another
-                    //FillTriangle(triProjected.vertices[0],
-                    //             triProjected.vertices[1],
-                    //             triProjected.vertices[2],
-                    //             triProjected.sym,
-                    //             triProjected.col);
-
+                    
                     FillTriangle(triProjected.vertices[0],
                         triProjected.vertices[1],
-                        triProjected.vertices[2]
+                        triProjected.vertices[2],
+                        triProjected.sym,
+                        triProjected.col
                     );
                 }
             }

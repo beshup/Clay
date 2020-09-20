@@ -47,7 +47,7 @@ private:
 
 		fTheta += 1.0f * fElapsedTime;
 		Fill(0, 0, c.ScreenWidth(), c.ScreenHeight(), PIXEL_SOLID, FG_BLACK);
-
+		Input(fElapsedTime);
 		RotateZX(fTheta, objects[0]);
 
 /*

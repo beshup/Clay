@@ -70,6 +70,7 @@ class Constants {
         //shading config taken from onelonecoder.com
         CHAR_INFO GetColor(float lumination)
         {
+            lumination = abs(lumination);
             short bg_col, fg_col;
             wchar_t sym;
             int pixel_bw = (int)(13.0f * lumination);
