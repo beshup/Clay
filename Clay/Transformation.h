@@ -31,27 +31,6 @@ public:
     }
   }
 
-  Transformation(string inputName, float fTheta)
-  {
-    name = inputName;
-    // can't use switch here :( (directly at least)
-
-    if (inputName == "world")
-    {
-      Transformation matRotZ;
-      Transformation matRotX;
-      Transformation matTrans;
-
-      matTrans.MakeTranslation(0.0f, 0.0f, 5.0f);
-      matRotX.RotateX(fTheta);
-      matRotZ.RotateZ(fTheta * 0.5f);
-
-      matrix.MakeIdentity();
-      matrix = MultiplyMatrix(matRotZ, matRotX);
-      matrix = MultiplyMatrix(matrix, matTrans);
-    }
-  }
-
   void RotateX(float fTheta)
   {
     matrix[0][0] = 1;
@@ -61,6 +40,16 @@ public:
     matrix[2][2] = cosf(fTheta * 0.5f);
     matrix[3][3] = 1;
   }
+
+  void RotateY(float fTheta) {
+			matrix[0][0] = cosf(fTheta);
+			matrix[0][1] = sinf(fTheta);
+			matrix[1][0] = -sinf(fTheta);
+			matrix[1][1] = 1.0f;
+			matrix[2][2] = cosf(fTheta);
+			matrix[3][3] = 1.0f;
+		}
+    
   void RotateZ(float fTheta)
   {
 
@@ -116,6 +105,34 @@ public:
     PointMat(vCamera, vTarget, vUp);
     mView = m1.Invert(mCamera);
   }
+  
+  void translate(float x, float y, float z) {
+			matrix[0][0] = 1.0f;
+			matrix[1][1] = 1.0f;
+			matrix[2][2] = 1.0f;
+			matrix[3][3] = 1.0f;
+			matrix[3][0] = x;
+			matrix[3][1] = y;
+			matrix[3][2] = z;
+		}
+
+		void project(float fFov, float fAspectRatio, float fNear, float fFar) {
+			float fFovRad = 1.0f / tanf(fFov * 0.5f / 180.0f * 3.141519f);
+			matrix[0][0] = fAspectRatio * fFovRad;
+			matrix[1][1] = fFovRad;
+			matrix[2][2] = fFar / (fFar - fNear);
+			matrix[3][2] = (-fFar * fNear) / (fFar - fNear);
+			matrix[2][3] = 1.0f;
+			matrix[3][3] = 0.0f;
+		}
+
+		void makeIdentity() {
+			matrix[0][0] = 1.0f;
+			matrix[1][1] = 1.0f;
+			matrix[2][2] = 1.0f;
+			matrix[3][3] = 1.0f;
+		}
+
 
   float mView[4][4] = {0};
   float mCamera[4][4] = {0};

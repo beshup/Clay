@@ -17,6 +17,7 @@ using namespace std;
 
 #include "Constants.h"
 #include "Transformation.h"
+#include "matrixMath.h"
 #include "Vertex.h"
 #include "Math.h"
 #include "Tri.h"
