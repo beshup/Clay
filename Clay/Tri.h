@@ -46,26 +46,47 @@ public:
     unNormalization();
   }
 
-  void RotateZ(float fTheta)
+  //defaulting speeds due to INTERNAL (to engine) use of the Rotates (not user-facing)
+  void RotateZ(float fTheta, float speed = 1.0f)
   {
     for (int i = 0; i < 3; i++)
     {
       Transformation t1;
-      t1.RotateZ(fTheta);
+      t1.RotateZ(fTheta * speed);
       MatrixMath m;
       m.MultiplyMatrixVector(t1, vertices[i]);
     }
   }
 
-  void RotateX(float fTheta)
+  void RotateY(float fTheta, float speed = 1.0f) {
+      for (int i = 0; i < 3; i++)
+      {
+          Transformation t1;
+          t1.RotateY(fTheta * speed);
+          MatrixMath m;
+          m.MultiplyMatrixVector(t1, vertices[i]);
+      }
+  }
+
+  void RotateX(float fTheta, float speed)
   {
     for (int i = 0; i < 3; i++)
     {
       Transformation t1;
-      t1.RotateX(fTheta);
+      t1.RotateX(fTheta * speed);
       MatrixMath m;
       m.MultiplyMatrixVector(t1, vertices[i]);
     }
+  }
+
+  void translate(float x, float y, float z, float xSpeed, float ySpeed, float zSpeed) {
+      for (int i = 0; i < 3; i++)
+      {
+          Transformation t1;
+          t1.translate(x * xSpeed, y * ySpeed, z * zSpeed);
+          MatrixMath m;
+          m.MultiplyMatrixVector(t1, vertices[i]);
+      }
   }
 
   int ClipWithPlane(Vertex plane, Vertex planeNormal, tri &result1, tri &result2)

@@ -1,0 +1,3 @@
+yaw: 0.9
+triangles seen: 35534958
+triangles not seen: 30382642
