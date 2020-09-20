@@ -1,10 +1,21 @@
 ﻿  Clay.cpp
-C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\clayGameEngine.h(324,17): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\clayGameEngine.h(325,17): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\clayGameEngine.h(328,21): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\clayGameEngine.h(328,18): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\clayGameEngine.h(345,20): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\clayGameEngine.h(346,20): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\clayGameEngine.h(347,19): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\clayGameEngine.h(348,19): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\clayGameEngine.h(725,25): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\clayGameEngine.h(726,25): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\clayGameEngine.h(729,29): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\clayGameEngine.h(729,26): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\clayGameEngine.h(739,24): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\clayGameEngine.h(740,24): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\clayGameEngine.h(741,24): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\clayGameEngine.h(742,24): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\clayGameEngine.h(743,24): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\clayGameEngine.h(744,24): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\clayGameEngine.h(757,32): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\clayGameEngine.h(771,32): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\clayGameEngine.h(813,27): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\clayGameEngine.h(819,24): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\clayGameEngine.h(820,24): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\clayGameEngine.h(821,24): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\clayGameEngine.h(822,24): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\clayGameEngine.h(823,24): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\Clay\clayGameEngine.h(824,24): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
   Clay.vcxproj -> C:\Users\Ishan\Desktop\SideProjects-Coding\Clay\x64\Debug\Clay.exe
