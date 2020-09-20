@@ -39,6 +39,13 @@ private:
 	bool OnUserCreate() {
 		object o = LoadFromObjectFile("./testCases/teapot.obj");
 		objects.push_back(o);
+		ofstream on;
+		on.open("./output.txt");
+		if (!on) {
+			exit(1);
+		}
+		on << "yaw: " << endl;
+		on.close();
 		return true;
 	}
 
@@ -48,7 +55,7 @@ private:
 		fTheta += 1.0f * fElapsedTime;
 		Fill(0, 0, c.ScreenWidth(), c.ScreenHeight(), PIXEL_SOLID, FG_BLACK);
 		Input(fElapsedTime);
-		RotateZX(fTheta, objects[0]);
+		init(objects);
 
 /*
     Transformation matRotZ;

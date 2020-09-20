@@ -393,6 +393,7 @@ protected:
    
             Transformation t1;
             Vertex temp = vTarget;
+            yaw = 0.9f;
             t1.RotateY(yaw);
             m2.MultiplyMatrixVector(t1, temp);
             vView = temp;
@@ -404,27 +405,6 @@ protected:
 
         void Input(float fElapsedTime) {
             Math m;
-            /*
-            if (GetKey(VK_UP).bHeld)
-                Vertex vForward = m.VectorMultiplication(vView, 8.0f * fElapsedTime);
-            if (GetKey(VK_DOWN).bHeld)
-                vCamera.y -= 8.0f * fElapsedTime;
-            if (GetKey(VK_LEFT).bHeld)
-                vCamera.x -= 8.0f * fElapsedTime;
-            if (GetKey(VK_RIGHT).bHeld)
-                vCamera.x += 8.0f * fElapsedTime;
-
-            Vertex vForward = m.VectorMultiplication(vView, 2.0f * fElapsedTime);
-            if (GetKey(L'A').bHeld)
-                vCamera = m.VectorAdd(vCamera, vForward);
-            if (GetKey(L'D').bHeld)
-                vCamera = m.VectorSub(vCamera, vForward);
-            if (GetKey(L'W').bHeld)
-                vCamera.y += 2.0f * fElapsedTime;
-            if (GetKey(L'S').bHeld)
-                vCamera.y -= 2.0f * fElapsedTime;
-
-            */
 
             if (GetKey(VK_UP).bHeld)
                 vCamera.y += 8.0f * fElapsedTime;	// Travel Upwards
@@ -497,6 +477,8 @@ protected:
   Vertex vView = { 0.0f, 0.0f, 1.0f };
   Transformation mView;
   Transformation mCamera;
+  int count;
+  int falseCount;
   float yaw;
 
   std::atomic<bool> m_bAtomActive;
@@ -526,6 +508,7 @@ protected:
             {
                 object newObj;
                 ifstream f(filename);
+                Math m;
 
                 if (!f.is_open())
                 {
@@ -549,6 +532,7 @@ protected:
                     {
                         Vertex v;
                         str >> garbage >> v.x >> v.y >> v.z;
+                      //  v = m.normalize(v);
                         vertices.push_back(v);
                     }
 
@@ -591,7 +575,7 @@ protected:
                   //rudimentary illumination
                   Vertex light = {0.0f, 1.0f, -1.0f};
 
-                  m.normalize(light);
+                  light = m.normalize(light);
 
                   float dotproduct = max(0.1f, m.dotProduct(normal, light));
 
@@ -599,10 +583,14 @@ protected:
                   triangle.col = c.Attributes;
                   triangle.sym = c.Char.UnicodeChar;
 
+                  count++;
                   return true;
+                  
                 } 
+                falseCount++;
                // return true;
                return false;
+
             }
 
             void WorldToViewSpace(tri &triangle) {
@@ -630,10 +618,10 @@ protected:
 
             void RotateZX(float fTheta, object o) {
                 vector<tri> toBeRasterized;
-                vector<unique_ptr<tri>> tbrForSort;
+              //  vector<unique_ptr<tri>> tbrForSort;
                 for (auto& triangle : o.tris) {
-                   // triangle.RotateZ(fTheta);
-                   // triangle.RotateX(fTheta);
+                    triangle.RotateZ(fTheta);
+                    triangle.RotateX(fTheta);
                     if (illumination(vCamera, triangle)) {
                         WorldToViewSpace(triangle);
                         triangle.ThreeDtoTwoD(vCamera);
@@ -645,8 +633,28 @@ protected:
                 Rasterize(toBeRasterized);
             }
 
-           
-            
+            void init(vector<object> objects) {
+                for (auto& object : objects) {
+                    vector<tri> toBeRasterized;
+                    for (auto& triangle : object.tris) {
+                        WorldToViewSpace(triangle);
+                        if (illumination(vCamera, triangle)) {
+                        
+                            triangle.ThreeDtoTwoD(vCamera);
+                            toBeRasterized.push_back(triangle);
+                        }
+                    }
+                    Rasterize(toBeRasterized);
+                }
+                ofstream o;
+                /*
+                o.open("./output.txt");
+                o << "yaw: " << yaw << endl;
+                o << "triangles seen: " << count << endl;
+                o << "triangles not seen: " << falseCount << endl;
+                o.close();
+                */
+            }
 
             void Rasterize(vector<tri> toBeRasterized) {
                 sort(toBeRasterized.begin(), toBeRasterized.end(), [](tri& t1, tri& t2)

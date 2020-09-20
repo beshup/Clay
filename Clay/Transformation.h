@@ -14,8 +14,8 @@ public:
     // can't use switch here :( (directly at least)
     if (inputName == "projected")
     {
-      float fNear = 0.3f;
-      float fFar = 2500.0f;
+      float fNear = 1.0f;
+      float fFar = 500.0f;
       float fFov = 150.0f;
       float fAspectRatio = (float)ScreenHeight() / (float)ScreenWidth();
       // degrees to rad
