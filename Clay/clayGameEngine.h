@@ -474,6 +474,9 @@ public:
   bool IsFocused() { return m_bConsoleInFocus; }
 
 protected:
+  int clippedTriangles = 0;
+  tri clipped[2];
+
   float fTheta;
   Constants c;
   CHAR_INFO *m_bufScreen;
@@ -608,6 +611,15 @@ public:
     {
       m1.MultiplyMatrixVector(mView, triangle.vertices[i]);
     }
+    ClipTriangles(triangle);
+  }
+
+  tri[] ClipTriangles(tri &triangle)
+  {
+    clippedTriangles = 0;
+    tri clipped[2];
+    clippedTriangles = triangle.ClipWithPlane({0.0f, 0.0f, 0.1f}, {0.0f, 0.0f, 1.0f}, clipped[0], clipped[1]);
+    return clipped;
   }
 
   void RotateZ(float fTheta, object o)
