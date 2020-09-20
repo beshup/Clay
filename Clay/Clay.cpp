@@ -23,34 +23,36 @@ using namespace std;
 #include "Tri.h"
 #include "clayGameEngine.h"
 
-class App : public clayGameEngine {
+class App : public clayGameEngine
+{
 public:
-	App() {
-		m_sAppName = L"Clay";
-	}
+  App()
+  {
+    m_sAppName = L"Clay";
+  }
 
-	vector<object> objects;
+  vector<object> objects;
 
 private:
-	float fTheta;
+  float fTheta;
 
+  bool OnUserCreate()
+  {
+    object o = LoadFromObjectFile("./TestCases/stool.obj");
+    objects.push_back(o);
+    return true;
+  }
 
+  bool OnUserUpdate(float fElapsedTime)
+  {
+    //wipe screen each time
 
-	bool OnUserCreate() {
-		object o = LoadFromObjectFile("./testCases/teapot.obj");
-		objects.push_back(o);
-		return true;
-	}
+    fTheta += 1.0f * fElapsedTime;
+    Fill(0, 0, c.ScreenWidth(), c.ScreenHeight(), PIXEL_SOLID, FG_BLACK);
+    Input(fElapsedTime);
+    RotateZX(fTheta, objects[0]);
 
-	bool OnUserUpdate(float fElapsedTime) {
-		//wipe screen each time
-
-		fTheta += 1.0f * fElapsedTime;
-		Fill(0, 0, c.ScreenWidth(), c.ScreenHeight(), PIXEL_SOLID, FG_BLACK);
-		Input(fElapsedTime);
-		RotateZX(fTheta, objects[0]);
-
-/*
+    /*
     Transformation matRotZ;
     Transformation matRotX;
     Transformation transMat;
@@ -64,16 +66,15 @@ private:
     matWorld = MultiplyMatrix(matRotZ, matRotX);
     matWorld = MultiplyMatrix(matWorld, matTrans);
 */
-		return true;
-	}
+    return true;
+  }
 };
-
 
 int main()
 {
-	App clay;
-	if (clay.ConstructConsole(300, 300, 1, 1)) {
-		clay.Start();
-	}
-
+  App clay;
+  if (clay.ConstructConsole(300, 300, 1, 1))
+  {
+    clay.Start();
+  }
 }
