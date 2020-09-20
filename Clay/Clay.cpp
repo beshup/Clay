@@ -72,7 +72,7 @@ private:
 int main()
 {
 	App clay;
-	if (clay.ConstructConsole(500, 500, 1, 1)) {
+	if (clay.ConstructConsole(300, 300, 1, 1)) {
 		clay.Start();
 	}
 
