@@ -39,4 +39,56 @@ class MatrixMath {
             } 
             return world;
         }
+
+         Transformation Invert(Transformation &mIn)
+            {
+                Transformation mOut;
+                mOut.matrix[0][0] = mIn.matrix[0][0];
+                mOut.matrix[0][1] = mIn.matrix[1][0];
+                mOut.matrix[0][2] = mIn.matrix[2][0];
+                mOut.matrix[0][3] = 0.0f;
+                mOut.matrix[1][0] = mIn.matrix[0][1];
+                mOut.matrix[1][1] = mIn.matrix[1][1];
+                mOut.matrix[1][2] = mIn.matrix[2][1];
+                mOut.matrix[1][3] = 0.0f;
+                mOut.matrix[2][0] = mIn.matrix[0][2];
+                mOut.matrix[2][1] = mIn.matrix[1][2];
+                mOut.matrix[2][2] = mIn.matrix[2][2];
+                mOut.matrix[2][3] = 0.0f;
+                mOut.matrix[3][0] = -(mIn.matrix[3][0] * mOut.matrix[0][0] + mIn.matrix[3][1] * mOut.matrix[1][0] + mIn.matrix[3][2] * mOut.matrix[2][0]);
+                mOut.matrix[3][1] = -(mIn.matrix[3][0] * mOut.matrix[0][1] + mIn.matrix[3][1] * mOut.matrix[1][1] + mIn.matrix[3][2] * mOut.matrix[2][1]);
+                mOut.matrix[3][2] = -(mIn.matrix[3][0] * mOut.matrix[0][2] + mIn.matrix[3][1] * mOut.matrix[1][2] + mIn.matrix[3][2] * mOut.matrix[2][2]);
+                mOut.matrix[3][3] = 1.0f;
+                return mOut;
+            }
+
+         void MultiplyMatrixVector(Transformation& m, Vertex &v)
+         {
+             float xRes;
+             float yRes;
+             float zRes;
+             float wRes;
+
+             xRes = v.x * m.matrix[0][0] + v.y * m.matrix[1][0] + v.z * m.matrix[2][0] + v.w * m.matrix[3][0];
+             yRes = v.x * m.matrix[0][1] + v.y * m.matrix[1][1] + v.z * m.matrix[2][1] + v.w * m.matrix[3][1];
+             zRes = v.x * m.matrix[0][2] + v.y * m.matrix[1][2] + v.z * m.matrix[2][2] + v.w * m.matrix[3][2];
+             // w being aritifically simulating "4th element" of input vector
+             wRes = v.x * m.matrix[0][3] + v.y * m.matrix[1][3] + v.z * m.matrix[2][3] + v.w * m.matrix[3][3];
+
+             if (m.name == "projection")
+             {
+                 if (v.w != 0.0f)
+                 {
+                     xRes /= v.w;
+                     yRes /= v.w;
+                     zRes /= v.w;
+                 }
+             }
+
+             v.x = xRes;
+             v.y = yRes;
+             v.z = zRes;
+             v.w = wRes;
+         }
+
 };

@@ -16,7 +16,7 @@ public:
     {
       float fNear = 0.3f;
       float fFar = 2500.0f;
-      float fFov = 90.0f;
+      float fFov = 150.0f;
       float fAspectRatio = (float)ScreenHeight() / (float)ScreenWidth();
       // degrees to rad
       float fFovRad = 1.0f / tanf(fFov * 0.5f / 180.0f * 3.141519f);
@@ -61,7 +61,7 @@ public:
     matrix[3][3] = 1;
   }
 
-  //PointAt and LookAt algorithms taken and modified from OneLonderCoder.com
+  /*
   void PointMat(Vertex &position, Vertex &target, Vertex &up)
   {
     Math m;
@@ -94,17 +94,19 @@ public:
     mCamera[3][2] = position.z;
     mCamera[3][3] = 1.0f;
   }
-
+  */
+/*
   void doThings(float mView[4][4], float nCamera[4][4])
   {
     //idk where this shit goes: red because wrong place
-    Math m1;
-    Vertex vView = {0, 0, 1};
-    Vertex vUp = {0, 1, 0};
+    MatrixMath m1;
+    Vertex vView = {0.0f, 0.0f, 1.0f};
+    Vertex vUp = {0.0f, 1.0f, 0.0f};
     Vertex vTarget = m1.VectorAdd(vCamera, vView);
     PointMat(vCamera, vTarget, vUp);
     mView = m1.Invert(mCamera);
   }
+  */
   
   void translate(float x, float y, float z) {
 			matrix[0][0] = 1.0f;

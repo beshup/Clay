@@ -16,9 +16,9 @@ using namespace std;
 #include <cstdlib>
 
 #include "Constants.h"
+#include "Vertex.h"
 #include "Transformation.h"
 #include "matrixMath.h"
-#include "Vertex.h"
 #include "Math.h"
 #include "Tri.h"
 #include "clayGameEngine.h"

@@ -22,10 +22,11 @@ class tri : public Constants {
 		}
 
 		void ThreeDtoTwoD(Vertex vCamera) {
-			offset();
+			offset(3.0f);
 			for (int i = 0; i < 3; i++) {
 				Transformation t1("projected");
-				vertices[i].MultiplyMatrixVector(t1);
+				MatrixMath m;
+				m.MultiplyMatrixVector(t1, vertices[i]);
 			}
 			// missing col?
 			add1();
@@ -36,7 +37,8 @@ class tri : public Constants {
 			for (int i = 0; i < 3; i++) {
 				Transformation t1;
 				t1.RotateZ(fTheta);
-				vertices[i].MultiplyMatrixVector(t1);
+				MatrixMath m;
+				m.MultiplyMatrixVector(t1, vertices[i]);
 			}
 		}
 
@@ -44,7 +46,8 @@ class tri : public Constants {
 			for (int i = 0; i < 3; i++) {
 				Transformation t1;
 				t1.RotateX(fTheta);
-				vertices[i].MultiplyMatrixVector(t1);
+				MatrixMath m;
+				m.MultiplyMatrixVector(t1, vertices[i]);
 			}
 		}
 

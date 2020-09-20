@@ -58,27 +58,4 @@ public:
   {
     return {a.x / k, a.y / k, a.z / k};
   }
-
-  //Taken and modified from OneLoneCoder.com
-  Transformation Invert(Transformation &mIn)
-  {
-    Transformation mOut;
-    mOut.matrix[0][0] = mIn.matrix[0][0];
-    mOut.matrix[0][1] = mIn.matrix[1][0];
-    mOut.matrix[0][2] = mIn.matrix[2][0];
-    mOut.matrix[0][3] = 0.0f;
-    mOut.matrix[1][0] = mIn.matrix[0][1];
-    mOut.matrix[1][1] = mIn.matrix[1][1];
-    mOut.matrix[1][2] = mIn.matrix[2][1];
-    mOut.matrix[1][3] = 0.0f;
-    mOut.matrix[2][0] = mIn.matrix[0][2];
-    mOut.matrix[2][1] = mIn.matrix[1][2];
-    mOut.matrix[2][2] = mIn.matrix[2][2];
-    mOut.matrix[2][3] = 0.0f;
-    mOut.matrix[3][0] = -(mIn.matrix[3][0] * mOut.matrix[0][0] + mIn.matrix[3][1] * mOut.matrix[1][0] + mIn.matrix[3][2] * mOut.matrix[2][0]);
-    mOut.matrix[3][1] = -(mIn.matrix[3][0] * mOut.matrix[0][1] + mIn.matrix[3][1] * mOut.matrix[1][1] + mIn.matrix[3][2] * mOut.matrix[2][1]);
-    mOut.matrix[3][2] = -(mIn.matrix[3][0] * mOut.matrix[0][2] + mIn.matrix[3][1] * mOut.matrix[1][2] + mIn.matrix[3][2] * mOut.matrix[2][2]);
-    mOut.matrix[3][3] = 1.0f;
-    return mOut;
-  }
 };
