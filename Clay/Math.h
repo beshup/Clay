@@ -59,5 +59,20 @@ public:
     return {a.x / k, a.y / k, a.z / k};
   }
 
-  
+  Vertex VectorPlaneIntersection(Vertex &plane, Vertex &planeNormal, Vertex &lineBegin, Vertex &lineEnd)
+  {
+    Vertex line = VectorSub(lineEnd, lineBegin);
+    planeNormal = normalize(planeNormal);
+    float planeDotProduct = dotProduct(planeNormal, plane);
+    float tDenom = dotProduct(lineEnd, planeNormal) - dotProduct(lineBegin, planeNormal);
+    float tNumerator = planeDotProduct - dotProduct(lineBegin, planeNormal);
+    float t = tNumerator / tDenom;
+    Vertex lineToIntersect = VectorMultiplication(line, t);
+    return VectorAdd(lineBegin, lineToIntersect);
+  }
+
+  float SignedDistance(Vertex plane, Vertex planeNormal, Vertex point)
+  {
+    return (planeNormal.x * point.x + planeNormal.y * point.y + planeNormal.z * point.z - dotProduct(planeNormal, normalize(plane)));
+  }
 };
