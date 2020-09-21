@@ -108,7 +108,7 @@ Translates the object in any direction. The below code will move the object 15 c
 
 ### 2D (XY plane) Draw Line
 
-Draws a line using a combination of the Bresenham and the Digital Differential Analyzer (DDA) algorithm. The below code draws a line from the top right of the screen to (250, 350).
+Draws a line using a combination of the Bresenham and the Digital Differential Analyzer (DDA) algorithm. The below code draws a line from the top left of the screen to (250, 350).
 
 ```
  DrawLine(0, 0, 250, 350);
