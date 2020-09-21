@@ -78,9 +78,9 @@ Rotates the object by the given angle around any axis. The below code demonstrat
 | Parameter  | Type | Required  | Default Value | Description  |
 |---|---|---|---|---|
 | fTheta  |  float  |  |  | The angle of rotation in radians  | 
-|  X | bool  |   |  |True to enable totation around the X-axis  |
-|  Y |  bool |   | |True to enable totation around the Y-axis   |   
-|  Z |  bool |   | |True to enable totation around the Z-axis   |  
+|  X | bool  |   |  |True to enable rotation around the X-axis  |
+|  Y |  bool |   | |True to enable rotation around the Y-axis   |   
+|  Z |  bool |   | |True to enable rotation around the Z-axis   |  
 |  xSpeed |  float |  Optional | 1.0 | Speed of rotation (multiplier) around X-axis   | 
 |  ySpeed |  float |  Optional | 1.0 | Speed of rotation (multiplier) around Y-axis   | 
 |  zSpeed |  float |  Optional | 1.0 | Speed of rotation (multiplier) around Z-axis   
