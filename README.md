@@ -11,7 +11,6 @@ $ Written from scratch without the use of external libraries
 * Windows OS
 * VisualStudio 2017/2019 (Or any C++ compiler)
 #### Launch
-//note: can put in numbered list
 * Clone the repository
 * In OnUserUpdate(), instantiate an instance of an object by either passing in the path to your object file, or constructing an object(s) yourself
 
