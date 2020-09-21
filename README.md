@@ -66,29 +66,6 @@ Constructs the console window given the width and height of the screen as well a
 |  fontw | int  |   |  | The desired number of pixels in the width of each character |
 |  fonth | int  |   |  | The desired number of pixels in the height of each character  |
 
-
-
-### Draw Line
-
-Draws a line using a combination of the Bressenham and the Digital Differential Analyzer (DDA) algorithm. The below code draws a line from the top right of the screen to (250, 350).
-
-```
- DrawLine(0, 0, 250, 350);
-```
-
-
-| Parameter  | Type | Required  | Default Value | Description  |
-|---|---|---|---|---|
-| x0  |  int  |  |  | The X coordinate of the beginning of the line  | 
-|  y0 | int  |   |  | The Y coordinate of the beginning of the line   |
-|  x1 | int  |   |  | The X coordinate of the end of the line  |
-|  y1 | int  |   |  | The Y coordinate of the end of the line  |
-|  c | short  |  optional  | 0x2588 | The shading of the line (SOLID/THREEQUARTERS/HALF/QUARTER) |
-|  col | short  | optional  | 0x000F | The color of the line |
-
-
-
-
 ### Rotate
 
 Rotates the object by the given angle around any axis. The below code demonstrates how to use the Rotate function by 1.4 radians around the X and Z axis, with the rotation around the X and Y axes sped up 2.5x and 1.3x respectively. However, fTheta is also computed for you, and passing in fTheta in OnUserUpdate() will continuously rotate the given object.
@@ -126,6 +103,26 @@ Translates the object in any direction. The below code will move the object 15 c
 |  xSpeed |  float |  Optional | 1.0 | The speed of movement in the X direction   | 
 |  ySpeed |  float |  Optional | 1.0 | The speed of movement in the Y direction   | 
 |  zSpeed |  float |  Optional | 1.0 | The speed of movement in the Z direction   |
+
+
+### Draw Line
+
+Draws a line using a combination of the Bressenham and the Digital Differential Analyzer (DDA) algorithm. The below code draws a line from the top right of the screen to (250, 350).
+
+```
+ DrawLine(0, 0, 250, 350);
+```
+
+
+| Parameter  | Type | Required  | Default Value | Description  |
+|---|---|---|---|---|
+| x0  |  int  |  |  | The X coordinate of the beginning of the line  | 
+|  y0 | int  |   |  | The Y coordinate of the beginning of the line   |
+|  x1 | int  |   |  | The X coordinate of the end of the line  |
+|  y1 | int  |   |  | The Y coordinate of the end of the line  |
+|  c | short  |  optional  | 0x2588 | The shading of the line (SOLID/THREEQUARTERS/HALF/QUARTER) |
+|  col | short  | optional  | 0x000F | The color of the line |
+
 
 onUsercreate on userupdate
 
