@@ -106,7 +106,7 @@ Translates the object in any direction. The below code will move the object 15 c
 |  zSpeed |  float |  Optional | 1.0 | The speed of movement in the Z direction   |
 
 
-### 2D Draw Line
+### 2D (XY plane) Draw Line
 
 Draws a line using a combination of the Bressenham and the Digital Differential Analyzer (DDA) algorithm. The below code draws a line from the top right of the screen to (250, 350).
 
