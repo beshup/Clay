@@ -4,6 +4,7 @@
 ``` 
 $ 3D Graphics Engine with built-in movement functionality 
 $ Written from scratch without the use of external libraries
+$ A looooot of linear algebra...
  ```
  
 ## Startup
