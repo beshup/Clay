@@ -42,7 +42,7 @@ o.tris = {
   
 ### 
 
-## API Implementation
+## API
 
 ### Construct Console
 
