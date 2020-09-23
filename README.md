@@ -125,8 +125,5 @@ Draws a line using a combination of the Bresenham and the Digital Differential A
 |  col | short  | optional  | 0x000F | The color of the line |
 
 
-onUsercreate on userupdate
-
-
 ## Acknowledgments
  `Ishan Ghimire, Erfan Huq, and Rakin Mohammed`
