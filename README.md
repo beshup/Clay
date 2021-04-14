@@ -1,5 +1,5 @@
 # Clay: 3D Graphics Engine
-**Experimental Beta (Cross-Platform Coming Soon!)**
+**Experimental Beta**
 
 ``` 
 $ 3D Graphics Engine with built-in movement functionality 
